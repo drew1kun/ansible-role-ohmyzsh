@@ -1,0 +1,83 @@
+---
+- name: '[users] Copy default zshrc to user home directory'
+  template:
+    src: zshrc.j2
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zshrc"
+    mode: 0644
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+  when: item.state is not defined or item.state == "present"
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+
+- name: '[users] Create directory structure'
+  file:
+    path: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh"
+    state: directory
+    recurse: yes
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+  when: item.state is not defined or item.state == "present"
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+
+- name: '[users] Copy default aliases'
+  template:
+    src: zshrc/aliases.j2
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/aliases"
+    mode: 0644
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+  when: item.state is not defined or item.state == "present"
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+
+- name: '[users] Copy custom aliases'
+  template:
+    src: zshrc/aliases.local.j2
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/aliases.local"
+    mode: 0644
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+  when: item.state is not defined or item.state == "present"
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+
+- name: '[users] Copy Powerlevel9k custom configuration'
+  copy:
+    src: zsh_powerlevel9k_cfg
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/"
+    mode: 0644
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+  when: (item.state is not defined or item.state == "present")
+    and (ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true )
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+
+- name: '[users] Set zsh as default shell'
+  user: name={{ item.user }} shell=/bin/zsh
+  when: item.state is not defined or item.state == "present"
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+
+- name: '[users] Set bash as default shell for uninstalled users'
+  user: name={{ item.user }} shell=/bin/bash
+  when: item.state is defined and item.state == "absent"
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+...

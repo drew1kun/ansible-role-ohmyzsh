@@ -1,0 +1,32 @@
+---
+galaxy_info:
+  author: Andrew Shagayev
+  description: This role installs zsh and oh-my-zsh
+  license: BSD
+  min_ansible_version: 1.7
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+
+  categories:
+    - system
+
+  galaxy_tags:
+    - zsh
+    - oh-my-zsh
+    - ohmyzsh
+    - Debian
+    - Ubuntu
+    - MacOS
+    - OSX
+    #
+    # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
+    #       Maximum 20 tags per role.
+
+dependencies: []
+...

@@ -1,0 +1,44 @@
+---
+ohmyzsh_install_dir: /usr/local/share/ohmyzsh
+
+ohmyzsh_custom_aliases: $HOME/.zsh/aliases.local
+
+ohmyzsh_powerlevel9k: true            # install amazing theme for zsh
+
+#ohmyzsh_users: []        # list of users to install zsh and ohmyzsh
+ohmyzsh_users:
+  - user: root                        # user name
+    theme: powerlevel9k/powerlevel9k  # ohmyzsh theme; use "random" for random theme
+#    ssh_ids: []                      # list of SSH ids to add to ohmyzsh ssh manager plugin
+#    plugins: []                      # list of ohmyzsh plugins to install
+    state: present                    # present or absent, to install/uninstall
+
+  - user: drew                        # user name
+    theme: powerlevel9k/powerlevel9k  # ohmyzsh theme; use "random" for random theme
+#    ssh_ids: []                      # list of SSH ids to add to ohmyzsh ssh manager plugin
+#    plugins: []                      # list of ohmyzsh plugins to install
+    state: present                    # present or absent, to install/uninstall
+
+ohmyzsh_default_theme: 'robbyrussell'
+
+ohmyzsh_default_plugins:
+  - tmux
+  - ssh-agent
+  - vagrant
+  - cp
+  - comand-not-found
+  - gnu-utils
+  - history
+  - python
+  - pip
+  - git
+  - git-extras
+#  - svn
+#  - mercurial
+#  - osx
+#  - brew
+#  - rails
+#  - ruby
+#  - bundle
+#  - rvm
+...

@@ -1,0 +1,35 @@
+---
+# Package module does not provide with_items optimisation (same as yum)
+# So it is faster to abstract out package managers via facts:
+- name: '[dependencies] Install ohzsh dependencies for non-mac distributions: zsh, git'
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state=latest"
+  with_items:
+    - zsh
+    - git
+  when: ansible_os_family != 'Darwin'
+  become: yes  # disable this for MacOS
+  tags:
+    - ohmyzsh
+    - ohmyzsh_dependencies
+
+# If installation of just one package needs to be unified then use of 'package' module is fine:
+- name: '[dependencies] Install powerlevel9k dependencies: bc'
+  package: name=bc state=latest
+  when: ohmyzsh_powerlevel9k == true
+  tags:
+    - ohmyzsh
+    - ohmyzsh_dependencies
+
+# Upper would work for Darwin too, but I want to specify install_options:
+- name: '[dependencies] Install zsh for MacOS; install_options: --with-unicode9, --without-etcdir'
+  homebrew:
+    install_options:
+      - 'with-unicode9'
+      - 'without-etcdir'
+    name: zsh
+    state: latest
+    update_homebrew: yes
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - ohmyzsh
+...

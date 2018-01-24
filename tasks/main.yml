@@ -1,0 +1,12 @@
+---
+- name: '[main] Include dependencies installation tasks'
+  include_tasks: dependencies.yml
+
+- name: '[main] Include installation tasks'
+  include_tasks: install.yml
+
+- name: '[main] Include users.yml playbook for multiple users installation if any users are specified'
+  include_tasks: users.yml
+  when: ohmyzsh_users | length > 0
+
+...

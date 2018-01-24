@@ -1,0 +1,89 @@
+# This file is managed by Ansible, all changes will be lost
+
+# Path to your oh-my-zsh configuration.
+ZSH={{ ohmyzsh_install_dir }}
+
+# For Solarized
+export TERM="xterm-256color"
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+# ZSH_THEME="random"
+ZSH_THEME="{{ item.theme if
+	(item is defined and item.theme is defined and item.theme != 'powerlevel9k/powerlevel9k')
+	or (item is defined and item.theme is defined
+	and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k == true)
+	else ohmyzsh_default_theme }}"
+
+{% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true %}
+source ~/.zsh/zsh_powerlevel9k_cfg
+{% endif %}
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
+
+# Comment this out to disable bi-weekly auto-update checks
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment following line if you want to disable colors in ls
+# DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
+
+{% if item is defined and item.ssh_ids is defined %}
+# SSH ids
+zstyle :omz:plugins:ssh-agent identities {{ item.ssh_ids|join(' ') }}
+{% endif %}
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format:count plugins=(rails git textmate ruby lighthouse)
+{% if item is defined and item.plugins is defined %}
+default_plugins=({{ (ohmyzsh_default_plugins|list + item.plugins|list)|join(' ') }})
+{% else %}
+default_plugins=({{ ohmyzsh_default_plugins|join(' ') }})
+{% endif %}
+
+if [ -f $HOME/.zsh/plugins ]; then
+  . $HOME/.zshrc/plugins
+  plugins=( ${default_plugins[@]} ${custom_plugins[@]} )
+else
+  plugins=$default_plugins
+fi
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+export PATH=$HOME/.local/bin:$PATH
+
+export EDITOR=vim
+export SHELL=zsh
+export LC_TYPE=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Load aliases
+if [ -f $HOME/.zsh/aliases ]; then
+  source $HOME/.zsh/aliases
+fi
+
+# Load custom configs
+if [ -d $HOME/.zsh/conf.d ]; then
+  for i in $HOME/.zsh/conf.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+fi
+
+# Load Rails environment variables if present
+if [ -f $HOME/.rails.env ]; then
+  source $HOME/.rails.env
+fi

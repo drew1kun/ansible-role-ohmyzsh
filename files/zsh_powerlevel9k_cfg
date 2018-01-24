@@ -1,0 +1,232 @@
+POWERLEVEL9K_MODE='nerdfont-complete'
+
+# TESTS:
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(icons_test)      # Dump all possible icons (TEST PURPOSES)
+
+# PROMPT SHAPE:
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir dir_writable vcs newline user host root_indicator os_icon)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status rbenv load disk_usage background_jobs swap ram battery command_execution_time time)
+
+POWERLEVEL9K_PROMPT_ON_NEWLINE=false                 # Two lines prompt
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=false              # false -- Makes Right Prompt to be on the same line as Left Prompt
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true               # Add new line after command execution
+
+#Powerline stype segment separators:
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\uE0B0'  #   -- Left-to-right Arrow (Powerline)
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0B2'  #  -- Right-to-left Arrow (Powerline)
+#
+# Circular segment separators:
+#POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\uE0B4'  #  -- Left-to-right Half-Circle (Powerline)
+#POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0B6'  #  -- Left-to-right Half-Circle (Powerline)
+
+#============================= LEFT PROMPT ==============================
+# DIR
+POWERLEVEL9K_HOME_ICON=$'\uF015'  #  -- home (Octicons)
+POWERLEVEL9K_HOME_SUB_ICON=$'\uF07C'  #  -- folder black (Font Awesome)
+POWERLEVEL9K_FOLDER_ICON=$'\uF115'  #   -- folder white (Font Awesome)
+
+# truncate_middle, truncate_with_package_name, truncate_with_folder_marker, truncate_to_unique, truncate_from_right:
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1  # Amount of symbols shown
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+
+DEFAULT_USER='drew'
+
+# USER
+POWERLEVEL9K_USER_TEMPLATE=%n  # Default: %n
+POWERLEVEL9K_USER_ICON=$'\uF415'  #  -- User icon (Octicons)
+#POWERLEVEL9K_USER_ICON=$'\uF2C0'  #    -- User icon (Font Awesome)
+#POWERLEVEL9K_USER_ICON=$'\uF46c'  #   -- User-in-hat icon (Octicons)
+#POWERLEVEL9K_USER_ICON=$'\uF21B'  #  -- User-in-hat icon (Font Awesome)
+#POWERLEVEL9K_USER_ICON=$'\uF007'  #   -- User icon (Font Awesome)
+POWERLEVEL9K_USER_DEFAULT_FOREGROUND='green'
+POWERLEVEL9K_USER_DEFAULT_BACKGROUND='black'
+POWERLEVEL9K_USER_ROOT_FOREGROUND='yellow'
+POWERLEVEL9K_USER_ROOT_BACKGROUND='black'
+
+# HOST
+POWERLEVEL9K_HOST_LOCAL_FOREGROUND='blue'
+POWERLEVEL9K_HOST_LOCAL_BACKGROUND='black'
+POWERLEVEL9K_HOST_REMOTE_FOREGROUND='blue'
+POWERLEVEL9K_HOST_REMOTE_BACKGROUND='black'
+#POWERLEVEL9K_HOST_TEMPLATE="%2m"            # Show the hostname before the second '.' dot
+#POWERLEVEL9K_HOST_TEMPLATE="`hostname -f`"  # Show full name
+POWERLEVEL9K_HOST_ICON="\uF109 "   #  -- Laptop icon (Font Awesome)
+#POWERLEVEL9K_HOST_ICON="\uF108 "   #  -- Desktop icon (Font Awesome)
+#POWERLEVEL9K_HOST_ICON="\uF67C "   #  -- Desktop icon (Octicons)
+POWERLEVEL9K_SSH_ICON="\uF489 "    #  -- Terminal icon (Octicons)
+#POWERLEVEL9K_SSH_ICON="\uE795 "    #  -- Terminal icon (Devicons)
+
+# CONTEXT
+POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=false  # Show context only when DEFAULT_USER is different or ssh. Default: false
+POWERLEVEL9K_ALWAYS_SHOW_USER=true # Always show user, but not hostname. Default: false
+POWERLEVEL9K_CONTEXT_TEMPLATE="%n@`hostname -f`"  # Show full hostname. Default: '%n@%m'
+POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND='yellow'
+POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND='black'
+
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='green'
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='black'
+
+# ROOOT INDICATOR
+POWERLEVEL9K_ROOT_ICON=$'\uF0E7'  #  -- Lightning (Font Awesome)
+POWERLEVEL9K_ROOT_INDICATOR_FOREGROUND='yellow'
+POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND='black'
+
+# IP
+POWERLEVEL9K_IP_INTERFACE=wlan0
+
+# PUBLIC_IP
+POWERLEVEL9K_PUBLIC_IP_FILE='/tmp/p8k_public_ip'  # The file your public IP is cached in. Default: '/tmp/p8k_public_ip'
+POWERLEVEL9K_PUBLIC_IP_HOST='http://ident.me'  # The default host to get your public IP. Default: 'http://ident.me'
+POWERLEVEL9K_PUBLIC_IP_TIMEOUT=300  # The amount of time in seconds between refreshing your cached IP. Default: 300
+POWERLEVEL9K_PUBLIC_IP_METHODS=(dig curl wget)  # These methods in that order are used to refresh your IP.
+POWERLEVEL9K_PUBLIC_IP_NONE=None  # The string displayed when an IP was not obtained
+
+# VPN
+POWERLEVEL9K_VPN_IP_INTERFACE='tun' # The VPN interface. Default: 'tun'
+
+# OS ICON  
+POWERLEVEL9K_OS_ICON_FOREGROUND='39'   # neon blue
+POWERLEVEL9K_OS_ICON_BACKGROUND='24'   # bright cyan
+#POWERLEVEL9K_OS_ICON_FOREGROUND='blue'
+#POWERLEVEL9K_OS_ICON_BACKGROUND='black'
+
+# DIR WRITABLE
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND='red'
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND='178'  # rich yellow
+
+# VCS
+POWERLEVEL9K_HIDE_BRANCH_ICON=false  # true -- to hide the branch icon from the segment. Default: false
+POWERLEVEL9K_SHOW_CHANGESET=false  # true -- display the hash / changeset in the segment. Default: false
+POWERLEVEL9K_CHANGESET_HASH_LENGTH='12' # Number of characters of the hash/changeset to display. Default: 12
+POWERLEVEL9K_VCS_SHOW_SUBMODULE_DIRTY=true  # false -- don't show submodule status in top-level repo prompt. Default: true
+POWERLEVEL9K_VCS_HIDE_TAGS=false  # true -- stop tags being displayed in the segment. Default: false
+# Layout of the segment for git repositories:
+POWERLEVEL9K_VCS_GIT_HOOK=(vcs-detect-changes git-untracked git-aheadbehind git-stash git-remotebranch git-tagname)
+POWERLEVEL9K_VCS_HG_HOOKS=(vcs-detect-changes)  # Layout of the segment for Mercurial repositories
+POWERLEVEL9K_VCS_SVN_HOOKS=(vcs-detect-changes svn-detect-changes)  # Layout of the segment for SVN repositories
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='green'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='magenta'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
+#GitHub:
+POWERLEVEL9K_VCS_BRANCH_ICON=$'\uF126 '             #  -- Branch with circles (Font Awesome)
+#POWERLEVEL9K_VCS_BRANCH_ICON=$'\uE725 '              #  --  Branch with circles (Octicons)
+#POWERLEVEL9K_VCS_BRANCH_ICON=$'\uE0A0 '              #  --  Branch with arrow (Powerline)
+  # Octocat -- 
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uF408 '         #  -- Big Octo-cat (Octicons)
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uF09B '         #  -- Smaller Octo-cat (Font Awesome)
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uE709 '         #  -- Smallest Octo-cat (Devicons)
+  # Octocat Face -- 
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uF406 '         #  -- Big Octo-cat (Octicons)
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uF113 '         #  -- Smaller Octo-cat (Awesome)
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uE708 '         #  -- Smallest Octo-cat (Devicons)
+# Bucket:
+POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON=$'\uF171 '      #  -- Big Bucket (Font Awesome)
+#POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON=$'\uE703 '      #  -- Small Bucket (Devicons)
+#POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON=$'\uF172 '        #   -- Square Bucket (Font Awesome)
+# Others:
+#POWERLEVEL9K_VCS_GIT_GITLAB_ICON=
+#POWERLEVEL9K_VCS_GIT_ICON=
+
+#========================================================================
+
+#=========================== RIGHT PROMPT ===============================
+# STATUS
+POWERLEVEL9K_STATUS_CROSS=false  # Use cross symbol instead of return value. Default: false
+POWERLEVEL9K_STATUS_OK=false  # true for showing this segment when the last command completed successfully. Default: true
+POWERLEVEL9K_STATUS_SHOW_PIPESTATUS=true  # true -- show the exit status for all piped commands. Default: true
+POWERLEVEL9K_STATUS_HIDE_SIGNAME=false  # true -- return the raw exit code (1-255)
+# false -- values over 128 are shown as SIGNAME(-n) (e.g. KILL(-9)). Default: false
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND='red'
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND='184'  # bright yellow
+
+# RBENV
+# rbenv should be installed and be in $PATH.
+# Shows only if current ruby version is different then global version.
+POWERLEVEL9K_RUBY_ICON=$'\uE21E'  #  -- Ruby  (Font Awesome Extensions)
+#POWERLEVEL9K_RUBY_ICON=$'\uE23E'  #  -- Ruby (Font Awesome Extensions)
+#POWERLEVEL9K_RUBY_ICON=$'\uF219'  #  -- Ruby  (Font Awesome)
+POWERLEVEL9K_RBENV_FOREGROUND='black'
+POWERLEVEL9K_RBENV_BACKGROUND='magenta'
+
+# LOAD
+POWERLEVEL9K_LOAD_WHICH='5'  # Which average to show. Possible values: 1, 5 or 15. Default: 5
+# Colorize the whole segment:
+#POWERLEVEL9K_LOAD_FOREGROUND='green'
+#POWERLEVEL9K_LOAD_BACKGROUND='black'
+POWERLEVEL9K_LOAD_NORMAL_FOREGROUND='cyan'
+POWERLEVEL9K_LOAD_NORMAL_BACKGROUND='black'
+POWERLEVEL9K_LOAD_WARNING_FOREGROUND='yellow'
+POWERLEVEL9K_LOAD_WARNING_BACKGROUND='black'
+POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND='magenta'
+POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND='black'
+# Colorize only the visual identifier:
+POWERLEVEL9K_LOAD_CRITICAL_VISUAL_IDENTIFIER_COLOR='red'
+POWERLEVEL9K_LOAD_WARNING_VISUAL_IDENTIFIER_COLOR='184'  # bright yellow
+POWERLEVEL9K_LOAD_NORMAL_VISUAL_IDENTIFIER_COLOR='green'
+
+# DISK USAGE
+POWERLEVEL9K_DISK_USAGE_ONLY_WARNING=false   # Hide the segment except when usage levels hit warning or critical.
+POWERLEVEL9K_DISK_USAGE_WARNING_LEVEL='85'   # The usage level that triggers a warning state. Default: 90
+POWERLEVEL9K_DISK_USAGE_CRITICAL_LEVEL='90'  # The usage level that triggers a critical state. Default: 95
+# Colorize the whole segment:
+#POWERLEVEL9K_DISK_USAGE_FOREGROUND='yellow'
+#POWERLEVEL9K_DISK_USAGE_BACKGROUND='black'
+POWERLEVEL9K_DISK_USAGE_NORMAL_FOREGROUND='cyan'
+POWERLEVEL9K_DISK_USAGE_NORMAL_BACKGROUND='black'
+POWERLEVEL9K_DISK_USAGE_WARNING_FOREGROUND='yellow'
+POWERLEVEL9K_DISK_USAGE_WARNING_BACKGROUND='black'
+POWERLEVEL9K_DISK_USAGE_CRITICAL_FOREGROUND='magenta'
+POWERLEVEL9K_DISK_USAGE_CRITICAL_BACKGROUND='black'
+# Colorize only the visual identifier:
+POWERLEVEL9K_DISK_USAGE_CRITICAL_VISUAL_IDENTIFIER_COLOR='red'
+POWERLEVEL9K_DISK_USAGE_WARNING_VISUAL_IDENTIFIER_COLOR='184'  # bright yellow
+POWERLEVEL9K_DISK_USAGE_NORMAL_VISUAL_IDENTIFIER_COLOR='green'
+
+# BACKGROUND JOBS
+# test this issuing 'sleep 10 &' command a couple times:
+POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true  # Show number of jobs (if there are more then one). Default: true
+POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='cyan'
+POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND='black'
+
+# SWAP
+POWERLEVEL9K_SWAP_FOREGROUND='black'
+POWERLEVEL9K_SWAP_BACKGROUND='cyan'
+
+# RAM
+#POWERLEVEL9K_RAM_ELEMENTS='swap_used'
+#POWERLEVEL9K_RAM_ELEMENTS='ram_free'
+POWERLEVEL9K_RAM_ELEMENTS='Both'
+POWERLEVEL9K_RAM_FOREGROUND='black'
+POWERLEVEL9K_RAM_BACKGROUND='cyan'
+
+# BATTERY
+POWERLEVEL9K_BATTERY_CHARGING_FOREGROUND='yellow'
+POWERLEVEL9K_BATTERY_CHARGING_BACKGROUND='black'
+POWERLEVEL9K_BATTERY_CHARGED_FOREGROUND='green'
+POWERLEVEL9K_BATTERY_CHARGED_BACKGROUND='black'
+POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND='cyan'
+POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND='black'
+POWERLEVEL9K_BATTERY_LOW_FOREGROUND='magenta'
+POWERLEVEL9K_BATTERY_LOW_BACKGROUND='black'
+POWERLEVEL9K_BATTERY_LOW_THRESHOLD=15                  # Threshold to consider battery level critical. Default: 10
+POWERLEVEL9K_BATTERY_VERBOSE=true                      # Display time remaining next to battery level
+
+# COMMAND EXECUTION
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD='2'      # 0 - always show. Default: 3
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION='2'      # Default: 2
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='80'    # bright cyan
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='24'    # dark blue
+
+# TIME
+# Output time, date, and a symbol from the "Awesome Powerline Font" set
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S \uF49B}"  #  -- Watch (Octicons)
+#POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S \uF43A %d.%m.%y}" #  -- Clock (Octicons)
+#POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S \uF017 %d.%m.%y}" #  -- Clock (Font Awesome)
+POWERLEVEL9K_TIME_FOREGROUND='80'  # bright cyan
+POWERLEVEL9K_TIME_BACKGROUND='24'  # dark blue
+#========================================================================
+
