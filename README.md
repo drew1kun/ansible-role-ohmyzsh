@@ -1,5 +1,8 @@
-ohmyzsh
+Ansible role: ohmyzsh
 =========
+
+[![MIT licensed][mit-badge]][mit-link]
+[![Galaxy Role][role-badge]][galaxy-link]
 
 Cross-platform ansible role for installing and configuring zsh with ![oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
@@ -10,9 +13,17 @@ Requirements
 
 One of the following OS (or deriviatives):
  - Debian | Ubuntu
- - MacOS
+ - MacOS (with [Homebrew][homebrew])
 
-The role installs parted and raspi-config packages as dependencies
+For MacOS:
+if Homebrew is not installed on the managed host, install the following role via galaxy:
+
+    ansible-galaxy install drew-kun.homebrew
+
+ And include it in the playbook:
+
+    roles:
+        - drew-kun.homebrew
 
 Role Variables
 --------------
@@ -38,22 +49,28 @@ OS-Specific:
 Dependencies
 ------------
 
-When used against MacOS hosts, then depends on:
- - drewshg312.homebrew
+None
 
 Example Playbook
 ----------------
 
-    - hosts: macos
+    - hosts: dev_clients_macos
       roles:
-         - drewshg312.ohmyzsh
+         - drew-kun.homebrew
+         - drew-kun.ohmyzsh
 
 License
 -------
 
-MIT
+[MIT][mit-link]
 
 Author Information
 ------------------
 
-Andrew Shagayev
+![Andrew Shagayev](drewshg@gmail.com)
+
+[role-badge]: https://img.shields.io/badge/role-drew--kunohmyzsh-green.svg
+[galaxy-link]: https://galaxy.ansible.com/drew-kun/ohmyzsh/
+[mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-ohmyzsh/master/LICENSE
+[homebrew]: http://brew.sh/
