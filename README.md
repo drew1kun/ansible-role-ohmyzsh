@@ -39,14 +39,14 @@ Dependencies
 ------------
 
 When used against MacOS hosts, then depends on:
- - homebrew
+ - drewshg312.homebrew
 
 Example Playbook
 ----------------
 
     - hosts: macos
       roles:
-         - ohmyzsh
+         - drewshg312.ohmyzsh
 
 License
 -------
