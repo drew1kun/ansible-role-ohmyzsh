@@ -4,9 +4,9 @@ Ansible role: ohmyzsh
 [![MIT licensed][mit-badge]][mit-link]
 [![Galaxy Role][role-badge]][galaxy-link]
 
-Cross-platform ansible role for installing and configuring zsh with ![oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+Cross-platform ansible role for installing and configuring zsh with [oh-my-zsh][ohmyzsh]
 
-Default oh-my-zsh theme: ![powerlevel9k](https://github.com/bhilburn/powerlevel9k)
+Default oh-my-zsh theme: [powerlevel9k][powerlevel9k]
 
 Requirements
 ------------
@@ -74,3 +74,5 @@ Author Information
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-ohmyzsh/master/LICENSE
 [homebrew]: http://brew.sh/
+[ohmyzsh]: https://github.com/robbyrussell/oh-my-zsh
+[powerlevel9k]: https://github.com/bhilburn/powerlevel9k
