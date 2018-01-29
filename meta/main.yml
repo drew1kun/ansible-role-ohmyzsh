@@ -12,6 +12,9 @@ galaxy_info:
     - name: Debian
       versions:
         - all
+    - name: MacOSX
+      versions:
+        - all
 
   categories:
     - system
