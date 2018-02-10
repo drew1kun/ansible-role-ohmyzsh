@@ -1,25 +1,62 @@
 #============================ CUSTOM ALIASES ===============================
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -aF --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+alias sudo='sudo -K'
+alias ls='ls -GFha'
+alias ll='ls -ltha'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+alias su='su -'
+alias u='cd ..'
+alias uu='cd .. && cd ..'
+alias uuu='cd ../../..'
+alias uuuu='for i in {1..4}; do cd ..; done'
+alias cp='cp -i'
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+alias cm='cmatrix -bf -u 9 -C cyan'
 
-# some more ls aliases
-alias ll='ls -lh'
-alias la='ls -A'
-alias l='ls -CF'
+alias ssh='ssh -Y'
+alias sshkey='ssh-add -k ~/.ssh/id_rsa'
+
+alias wgetp='wget -P ~/Downloads/'
 
 alias digextip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias digddnsip='dig bearden-local.ddns.net +short'
-#===========================================================================
+alias curlextip='curl -s https://4.ifcfg.me/' # HTTPS
+alias curlextip1='curl curlmyip.com'
 
+{% if ansible_os_family == 'Darwin' %}
+#===================== MacOS specific aliases and functions ================
+alias rbv='echo "rbenv versions:" && \
+	rbenv versions && \
+	echo "current ruby -v:" && \
+	ruby -v && \
+	echo "System ruby:" && \
+	/usr/bin/ruby -v'
+
+alias ipa="ipconfig getifaddr"
+
+# return my NAT IP address:
+function myip() {
+	ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+}
+
+# Change directory to the current Finder directory:
+cdf() {
+	target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text  ↳ )'`
+	if [ "$target" != "" ]; then
+	    cd "$target"; pwd
+	else
+	    echo 'No Finder window found' >&2
+	fi
+}
+{% else %}
+alias rbv='echo "rbenv versions:" && \
+	rbenv versions && \
+	echo "current ruby -v:" && \
+	ruby -v
+
+{% endif %}
+#===========================================================================
