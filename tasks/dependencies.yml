@@ -6,17 +6,21 @@
   with_items:
     - zsh
     - git
+    - bc
   when: ansible_os_family != 'Darwin'
   become: yes  # disable this for MacOS
   tags:
     - ohmyzsh
     - ohmyzsh_dependencies
 
-# If installation of just one package needs to be unified then use of 'package' module is fine:
+
+# MacOS:
 - name: '[dependencies] Install powerlevel9k dependencies: bc'
-  package: name=bc state=latest
-  when: ohmyzsh_powerlevel9k == true
-  become: yes
+  homebrew: name=bc state=latest
+  when:
+    - ohmyzsh_powerlevel9k == true
+    - ansible_os_family == 'Darwin'
+  become: no    # always the case with homebrew
   tags:
     - ohmyzsh
     - ohmyzsh_dependencies
