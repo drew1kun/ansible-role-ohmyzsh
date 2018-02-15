@@ -42,15 +42,20 @@ function myip() {
 	ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 
-# Change directory to the current Finder directory:
-cdf() {
-	target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text  ↳ )'`
-	if [ "$target" != "" ]; then
-	    cd "$target"; pwd
-	else
-	    echo 'No Finder window found' >&2
-	fi
+## Change directory to the current Finder directory:
+# https://stackoverflow.com/questions/18456682/mac-terminal-change-directory-to-current-front-finder-window
+cdf () {
+  finderPath=`osascript -e 'tell application "Finder"
+                               try
+                                   set currentFolder to (folder of the front window as alias)
+                               on error
+                                   set currentFolder to (path to desktop folder as alias)
+                               end try
+                               POSIX path of currentFolder
+                            end tell'`;
+  cd "$finderPath"
 }
+
 {% else %}
 alias rbv='echo "rbenv versions:" && \
 	rbenv versions && \
