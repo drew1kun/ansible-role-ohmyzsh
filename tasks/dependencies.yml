@@ -16,11 +16,11 @@
 - name: '[dependencies] Install powerlevel9k dependencies: bc'
   package: name=bc state=latest
   when: ohmyzsh_powerlevel9k == true
+  become: yes
   tags:
     - ohmyzsh
     - ohmyzsh_dependencies
 
-# Upper would work for Darwin too, but I want to specify install_options:
 - name: '[dependencies] Install zsh for MacOS; install_options: --with-unicode9, --without-etcdir'
   homebrew:
     install_options:
@@ -30,6 +30,7 @@
     state: latest
     update_homebrew: yes
   when: ansible_os_family == 'Darwin'
+  become: no
   tags:
     - ohmyzsh
 ...
