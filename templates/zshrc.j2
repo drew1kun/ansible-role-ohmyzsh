@@ -22,7 +22,7 @@ ZSH_THEME="{{ item.theme if
 	else ohmyzsh_default_theme }}"
 
 {% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true %}
-source ~/.zsh/zsh_powerlevel9k_cfg
+source {{ ohmyzsh_powerlevel9k_cfg }}
 {% endif %}
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
