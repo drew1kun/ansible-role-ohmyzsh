@@ -3,7 +3,7 @@ ohmyzsh_install_dir: /usr/local/share/ohmyzsh
 
 ohmyzsh_custom_aliases: $HOME/.zsh/aliases.local
 
-ohmyzsh_powerlevel9k: true            # install amazing theme for zsh
+ohmyzsh_powerlevel9k: yes             # install amazing theme for zsh
 ohmyzsh_powerlevel9k_cfg: $HOME/.zsh/omz_powerlevel9k.cfg
 
 ohmyzsh_users:

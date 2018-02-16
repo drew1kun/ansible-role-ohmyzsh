@@ -52,15 +52,15 @@
     - ohmyzsh
 
 - name: '[users] Generate Powerlevel9k custom configuration'
-  template:
-    src: zsh/omz_powerlevel9k.cfg.j2
-    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/omz_powerlevel9k_cfg"
+  copy:
+    src: zsh/omz_powerlevel9k.cfg
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/"
     mode: 0644
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
   when:
-    - (item.state is not defined or item.state == "present")
-    - (ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true )
+    - item.state is not defined or item.state == "present"
+    - ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags:
