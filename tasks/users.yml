@@ -53,7 +53,7 @@
 
 - name: '[users] Generate Powerlevel9k custom configuration'
   template:
-    src: zsh/omz_powerlevel9k_cfg.j2
+    src: zsh/omz_powerlevel9k.cfg.j2
     dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/omz_powerlevel9k_cfg"
     mode: 0644
     owner: "{{ item.user }}"
