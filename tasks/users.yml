@@ -25,9 +25,9 @@
   tags:
     - ohmyzsh
 
-- name: '[users] Copy default aliases'
+- name: '[users] Generate default aliases'
   template:
-    src: zshrc/aliases.j2
+    src: zsh/aliases.j2
     dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/aliases"
     mode: 0644
     owner: "{{ item.user }}"
@@ -38,9 +38,9 @@
   tags:
     - ohmyzsh
 
-- name: '[users] Copy custom aliases'
+- name: '[users] Generate custom aliases'
   template:
-    src: zshrc/aliases.local.j2
+    src: zsh/aliases.local.j2
     dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/aliases.local"
     mode: 0644
     owner: "{{ item.user }}"
@@ -51,15 +51,16 @@
   tags:
     - ohmyzsh
 
-- name: '[users] Copy Powerlevel9k custom configuration'
-  copy:
-    src: zsh_powerlevel9k_cfg
-    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/"
+- name: '[users] Generate Powerlevel9k custom configuration'
+  template:
+    src: zsh/omz_powerlevel9k_cfg.j2
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/omz_powerlevel9k_cfg"
     mode: 0644
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
-  when: (item.state is not defined or item.state == "present")
-    and (ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true )
+  when:
+    - (item.state is not defined or item.state == "present")
+    - (ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true )
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags:

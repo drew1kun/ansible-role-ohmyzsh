@@ -4,18 +4,6 @@
   tags:
     - ohmyzsh
 
-#- name: '[install] Include OSX-specific variables'
-#  include_vars: Darwin.yml
-#  when: ansible_os_family == 'Darwin'
-#  tags:
-#    - ohmyzsh
-#
-#- name: '[install] Include Debian-specific variables'
-#  include_vars: Debian.yml
-#  when: ansible_os_family == 'Debian'
-#  tags:
-#    - ohmyzsh
-
 - name: '[install] Clone oh-my-zsh repo'
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
