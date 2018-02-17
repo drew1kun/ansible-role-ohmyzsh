@@ -35,4 +35,12 @@
   tags:
     - ohmyzsh
 
+- name: '[install] Set up en_US.UTF-8 locale'
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  when: ansible_os_family != 'Darwin'
+  become: yes
+  tags:
+    - ohmyzsh
 ...
