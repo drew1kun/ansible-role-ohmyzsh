@@ -10,7 +10,8 @@ alias cp='cp -i'
 
 alias cm='cmatrix -bf -u 9 -C cyan'
 
-alias ssh='ssh -Y'
+# On MAC: do not use /usr/local/bin/ssh from Homebrew, use system one:
+alias ssh='/usr/bin/ssh -Y'  # This enables 'UseKeychan' and 'AddKeysToAgent' ~/.ssh/config options
 
 alias wgetp='wget -P ~/Downloads/'
 
