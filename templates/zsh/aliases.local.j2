@@ -11,7 +11,10 @@ alias cp='cp -i'
 alias cm='cmatrix -bf -u 9 -C cyan'
 
 # On MAC: do not use /usr/local/bin/ssh from Homebrew, use system one:
+# also to make this work with 'git push', make sure you removed openssh package from homebrew
+# so there is a correct (/usr/bin/ssh) client in your $PATH
 alias ssh='/usr/bin/ssh -Y'  # This enables 'UseKeychan' and 'AddKeysToAgent' ~/.ssh/config options
+							 # -Y - use X11 Forwarding by default (works on Linux only)
 
 alias wgetp='wget -P ~/Downloads/'
 
