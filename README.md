@@ -69,7 +69,7 @@ Author Information
 
 Andrew Shagayev
 
-[role-badge]: https://img.shields.io/badge/role-drew--kunohmyzsh-green.svg
+[role-badge]: https://img.shields.io/badge/role-drew--kun.ohmyzsh-green.svg
 [galaxy-link]: https://galaxy.ansible.com/drew-kun/ohmyzsh/
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-ohmyzsh/master/LICENSE
