@@ -29,22 +29,22 @@ Role Variables
 --------------
 OS-Agnostic:
 
-    ohmyzsh_install_dir:                # directory oh-my-zsh to be installed in
-    ohmyzsh_custom_aliases:             # file containing custom shell config
-    ohmyzsh_powerlevel9k: true|false    # whether to install powerlevel9k theme or not
-    ohmyzsh_users:                      # list of users to install zsh/oh-my-zsh for
-      - user:
-          theme:                       # theme to be configured for user (if not specified the default theme will be configured)
-          state: present|absent        # whether install or remove oh-my-zsh configuration for user
-
-    ohmyzsh_default_theme:             # default theme to be configured for users which do not have theme specified
-    ohmyzsh_default_plugins:           # the list of plugins for oh-my-zhs to be installed
+| Variable | Description | Default |
+|----------|-------------|---------|
+| **ohmyzsh_install_dir** | Directory oh-my-zsh to be installed in | `/usr/local/share/ohmyzsh` |
+| **ohmyzsh_custom_aliases** | File containing custom shell config | `$HOME/.zsh/aliases.local` |
+| **ohmyzsh_powerlevel9k** | Whether to install powerlevel9k theme or not | `yes` |
+| **ohmyzsh_users[]** | List of users to install zsh/oh-my-zsh for | see [`defaults/main.yml`](defaults/main.yml) |
+| **ohmyzsh_default_theme** | Default theme to be configured for users which do not have theme specified | `robbyrussell` |
+| **ohmyzsh_default_plugins[]** | The list of plugins for oh-my-zhs to be installed | see [`defaults/main.yml`](defaults/main.yml) |
 
 OS-Specific:
 
-    ohmyzsh_root_dir:                  # root directory
-    ohmyzsh_home_dir:                  # user's home directory
-    ohmyzsh_zprofile_dir:              # zsh profile directory
+| Variable | Description | Default |
+|----------|-------------|---------|
+| **ohmyzsh_root_dir** | Root directory | <ul><li>Darwin: `/var/root`</li><li>Debian: `/root`</li></ul> |
+| **ohmyzsh_home_dir** | User's home directory | <ul><li>Darwin: `/Users/`</li><li>Debian: `/home/`</li></ul> |
+| **ohmyzsh_zprofile_dir** | Zsh profile directory | <ul><li>Darwin: `/etc/`</li><li>Debian: `/etc/zsh/`</li></ul> |
 
 Dependencies
 ------------
