@@ -35,11 +35,14 @@
   tags:
     - ohmyzsh
 
+# For Debian and maybe other distros:
 - name: '[install] Set up en_US.UTF-8 locale'
   locale_gen:
     name: en_US.UTF-8
     state: present
-  when: ansible_os_family != 'Darwin'
+  when:
+    - ansible_os_family != 'Darwin'
+    - ansible_os_family != 'RedHat'
   become: yes
   tags:
     - ohmyzsh
