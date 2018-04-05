@@ -13,6 +13,9 @@
     - ohmyzsh
     - ohmyzsh_dependencies
 
+- name: '[dependencies] Make sure locales package is installed on Debian'
+  apt: name=locales state=present
+  when: ansible_os_family == 'Debian'
 
 # MacOS:
 - name: '[dependencies] Install powerlevel9k dependencies: bc'
@@ -37,4 +40,5 @@
   become: no
   tags:
     - ohmyzsh
+    - ohmyzsh_dependencies
 ...
