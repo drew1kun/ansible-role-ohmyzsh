@@ -1,7 +1,7 @@
 ---
 # Package module does not provide with_items optimisation (same as yum)
 # So it is faster to abstract out package managers via facts:
-- name: '[dependencies] Install ohzsh dependencies for non-mac distributions: zsh, git'
+- name: '[dependencies] Install ohzsh dependencies for non-Darwin systems: zsh, git'
   action: "{{ ansible_pkg_mgr }} name={{ item }} state=latest"
   with_items:
     - zsh
