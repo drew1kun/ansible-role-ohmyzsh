@@ -8,6 +8,11 @@ Cross-platform ansible role for installing and configuring zsh with [oh-my-zsh][
 
 Default oh-my-zsh theme: [powerlevel9k][powerlevel9k]
 
+In combination with [ansible-macos_terminal role](https://github.com/drew-kun/ansible-macos_terminal) getting the following results:
+
+![alt text](https://github.com/drew-kun/ansible-ohmyzsh/blob/master/imgs/iterm2_ohmzsh.png "iTerm2")
+
+
 Requirements
 ------------
 
