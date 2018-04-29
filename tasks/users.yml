@@ -72,7 +72,7 @@
     dest: "/etc/sudoers.d/{{ item.user }}"
     mode: 0440
     owner: root
-    group: root
+    group: "{{ 'root' if ansible_os_family != 'Darwin' else 'wheel' }}"
   when: ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k
   with_items: "{{ ohmyzsh_users }}"
   become: yes
