@@ -66,6 +66,19 @@
   tags:
     - ohmyzsh
 
+- name: '[users] Add custom sudoers config to not reset environment variables when doing `sudo -s` for each zsh user'
+  template:
+    src: sudoers.d/user.j2
+    dest: "/etc/sudoers.d/{{ item.user }}"
+    mode: 0440
+    owner: root
+    group: root
+  when: ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+    - ohmyzsh
+
 - name: '[users] Set zsh as default shell'
   user: name={{ item.user }} shell=/bin/zsh
   when: item.state is not defined or item.state == "present"
