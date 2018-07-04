@@ -8,9 +8,9 @@ Cross-platform ansible role for installing and configuring zsh with [oh-my-zsh][
 
 Default oh-my-zsh theme: [powerlevel9k][powerlevel9k]
 
-In combination with [ansible-macos_terminal role](https://github.com/drew-kun/ansible-macos_terminal) getting the following results:
+In combination with [ansible-macos_terminal role](https://github.com/drew_kun/ansible-macos_terminal) getting the following results:
 
-![alt text](https://github.com/drew-kun/ansible-ohmyzsh/blob/master/imgs/iterm2_ohmzsh.png "iTerm2")
+![alt text](https://github.com/drew_kun/ansible-ohmyzsh/blob/master/imgs/iterm2_ohmzsh.png "iTerm2")
 
 
 Requirements
@@ -25,12 +25,12 @@ One of the following OS (or deriviatives):
 For MacOS:
 if Homebrew is not installed on the managed host, install the following role via galaxy:
 
-    ansible-galaxy install drew-kun.homebrew
+    ansible-galaxy install drew_kun.homebrew
 
  And include it in the playbook:
 
     roles:
-        - drew-kun.homebrew
+        - drew_kun.homebrew
 
 Role Variables
 --------------
@@ -64,8 +64,8 @@ Example Playbook
     - hosts: dev_clients_macos
       gather_facts: yes
       roles:
-         - drew-kun.homebrew
-         - drew-kun.ohmyzsh
+         - drew_kun.homebrew
+         - drew_kun.ohmyzsh
 
 License
 -------
@@ -77,10 +77,10 @@ Author Information
 
 Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 
-[role-badge]: https://img.shields.io/badge/role-drew--kun.ohmyzsh-green.svg
-[galaxy-link]: https://galaxy.ansible.com/drew-kun/ohmyzsh/
+[role-badge]: https://img.shields.io/badge/role-drew__kun.ohmyzsh-green.svg
+[galaxy-link]: https://galaxy.ansible.com/drew_kun/ohmyzsh/
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-ohmyzsh/master/LICENSE
+[mit-link]: https://raw.githubusercontent.com/drew_kun/ansible-ohmyzsh/master/LICENSE
 [homebrew]: http://brew.sh/
 [ohmyzsh]: https://github.com/robbyrussell/oh-my-zsh
 [powerlevel9k]: https://github.com/bhilburn/powerlevel9k
