@@ -25,10 +25,10 @@ galaxy_info:
     - zsh
     - oh-my-zsh
     - ohmyzsh
-    - Debian
-    - Ubuntu
-    - MacOS
-    - OSX
+    - debian
+    - ubuntu
+    - macos
+    - osx
 
 dependencies: []
 ...
