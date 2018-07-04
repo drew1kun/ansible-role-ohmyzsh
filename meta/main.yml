@@ -23,7 +23,7 @@ galaxy_info:
 
   galaxy_tags:
     - zsh
-    - oh-my-zsh
+    - oh_my_zsh
     - ohmyzsh
     - debian
     - ubuntu
