@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: ohmyzsh
   author: Andrew Shagayev
   description: This role installs zsh and oh-my-zsh
   license: MIT
