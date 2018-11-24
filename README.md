@@ -61,11 +61,13 @@ None
 Example Playbook
 ----------------
 
-    - hosts: dev_clients_macos
-      gather_facts: yes
-      roles:
-         - drew-kun.homebrew
-         - drew-kun.ohmyzsh
+```yaml
+- hosts: dev_clients_macos
+  gather_facts: yes
+  roles:
+  - drew-kun.homebrew
+  - drew-kun.ohmyzsh
+```
 
 License
 -------
