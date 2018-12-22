@@ -1,12 +1,8 @@
 ---
-# Package module does not provide with_items optimisation (same as yum)
-# So it is faster to abstract out package managers via facts:
 - name: '[dependencies] Install ohmyzsh dependencies for non-Darwin systems: zsh, git'
-  action: "{{ ansible_pkg_mgr }} name={{ item }} state=latest"
-  with_items:
-    - zsh
-    - git
-    - bc
+  package:
+    name: [ 'zsh', 'git', 'bc' ]
+    state: latest
   when: ansible_os_family != 'Darwin'
   become: yes  # disable this for MacOS
   tags:
