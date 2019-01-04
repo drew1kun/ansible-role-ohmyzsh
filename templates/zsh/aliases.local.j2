@@ -4,8 +4,10 @@ alias ls='ls -GFha' {# -G - colorize output on BSD #}
 {% else %}
 alias ls='ls -Fha' {# -G - do not show Groups on GNU/linux #}
 {% endif %}
+
 alias ll='ls -ltha'
 
+alias su='su -'
 alias u='cd ..'
 alias uu='cd .. && cd ..'
 alias uuu='cd ../../..'
@@ -14,59 +16,58 @@ alias cp='cp -i'
 
 alias cm='cmatrix -bf -u 9 -C cyan'
 
-# On MAC: do not use /usr/local/bin/ssh from Homebrew, use system one:
-# also to make this work with 'git push', make sure you removed openssh package from homebrew
-# so there is a correct (/usr/bin/ssh) client in your $PATH
-alias ssh='/usr/bin/ssh -Y'  # This enables 'UseKeychan' and 'AddKeysToAgent' ~/.ssh/config options
-							 # -Y - use X11 Forwarding by default (works on Linux only)
-
 alias wgetp='wget -P ~/Downloads/'
 
 alias digextip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias curlextip='curl -s https://4.ifcfg.me/' # HTTPS
 alias curlextip1='curl curlmyip.com'
 
+# On MAC: do not use /usr/local/bin/ssh from Homebrew, use system one:
+# also to make this work with 'git push', make sure you removed openssh package from homebrew
+# so there is a correct (/usr/bin/ssh) client in your $PATH
+alias ssh='/usr/bin/ssh -Y'  # This also enables 'UseKeychan' and 'AddKeysToAgent' ~/.ssh/config options
+                             # -Y - use X11 Forwarding by default (works on Linux only)
+
+alias updatedb='sudo sudo /usr/libexec/locate.updatedb'
+
 {% if ansible_os_family == 'Darwin' %}
 #===================== MacOS specific aliases and functions ================
 alias rbv='echo "rbenv versions:" && \
-	rbenv versions && \
-	echo "current ruby -v:" && \
-	ruby -v && \
-	echo "System ruby:" && \
-	/usr/bin/ruby -v'
+  rbenv versions && \
+  echo "current ruby -v:" && \
+  ruby -v && \
+  echo "System ruby:" && \
+  /usr/bin/ruby -v'
 
 alias ipa="ipconfig getifaddr"
 
 # return my NAT IP address:
 function myip() {
-	ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
-	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+  ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 
-## Change directory to the current Finder directory:
-# https://stackoverflow.com/questions/18456682/mac-terminal-change-directory-to-current-front-finder-window
 cdf () {
   finderPath=`osascript -e 'tell application "Finder"
-                               try
-                                   set currentFolder to (folder of the front window as alias)
-                               on error
-                                   set currentFolder to (path to desktop folder as alias)
-                               end try
-                               POSIX path of currentFolder
-                            end tell'`;
+    try
+      set currentFolder to (folder of the front window as alias)
+      on error
+      set currentFolder to (path to desktop folder as alias)
+    end try
+    POSIX path of currentFolder
+    end tell'`;
   cd "$finderPath"
 }
-
 {% else %}
 alias rbv='echo "rbenv versions:" && \
-	rbenv versions && \
-	echo "current ruby -v:" && \
-	ruby -v'
+  rbenv versions && \
+  echo "current ruby -v:" && \
+  ruby -v'
 
 {% endif %}
 #===========================================================================
