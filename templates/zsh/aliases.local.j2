@@ -28,10 +28,10 @@ alias curlextip1='curl curlmyip.com'
 alias ssh='/usr/bin/ssh -Y'  # This also enables 'UseKeychan' and 'AddKeysToAgent' ~/.ssh/config options
                              # -Y - use X11 Forwarding by default (works on Linux only)
 
-alias updatedb='sudo sudo /usr/libexec/locate.updatedb'
-
 {% if ansible_os_family == 'Darwin' %}
 #===================== MacOS specific aliases and functions ================
+alias updatedb='sudo sudo /usr/libexec/locate.updatedb'
+
 alias rbv='echo "rbenv versions:" && \
   rbenv versions && \
   echo "current ruby -v:" && \
