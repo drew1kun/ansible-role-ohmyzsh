@@ -2,39 +2,50 @@
 - name: '[dependencies] Install ohmyzsh dependencies for non-Darwin systems: zsh, git'
   package:
     name: [ 'zsh', 'git', 'bc' ]
-    state: latest
-  when: ansible_os_family != 'Darwin'
+    state: present
   become: yes  # disable this for MacOS
+  register: ohmyzsh_dep_result
+  until: ohmyzsh_dep_result is succeeded
+  when: ansible_os_family != 'Darwin'
   tags:
-    - ohmyzsh
-    - ohmyzsh_dependencies
+  - ohmyzsh
+  - ohmyzsh_dependencies
 
 - name: '[dependencies] Make sure locales package is installed on Debian'
   apt: name=locales state=present
+  register: ohmyzsh_dep_result
+  until: ohmyzsh_dep_result is succeeded
   when: ansible_os_family == 'Debian'
+  tags:
+  - ohmyzsh
+  - ohmyzsh_dependencies
 
 # MacOS:
 - name: '[dependencies] Install powerlevel9k dependencies: bc'
-  homebrew: name=bc state=latest
+  homebrew: name=bc state=present
+  become: no  # always the case with homebrew
+  register: ohmyzsh_dep_result
+  until: ohmyzsh_dep_result is succeeded
   when:
-    - ohmyzsh_powerlevel9k == true
-    - ansible_os_family == 'Darwin'
-  become: no    # always the case with homebrew
+  - ohmyzsh_powerlevel9k == true
+  - ansible_os_family == 'Darwin'
   tags:
-    - ohmyzsh
-    - ohmyzsh_dependencies
+  - ohmyzsh
+  - ohmyzsh_dependencies
 
 - name: '[dependencies] Install zsh for MacOS; install_options: --with-unicode9, --without-etcdir'
   homebrew:
     install_options:
-      - 'with-unicode9'
-      - 'without-etcdir'
+    - 'with-unicode9'
+    - 'without-etcdir'
     name: zsh
-    state: latest
+    state: present
     update_homebrew: yes
-  when: ansible_os_family == 'Darwin'
   become: no
+  register: ohmyzsh_dep_result
+  until: ohmyzsh_dep_result is succeeded
+  when: ansible_os_family == 'Darwin'
   tags:
-    - ohmyzsh
-    - ohmyzsh_dependencies
+  - ohmyzsh
+  - ohmyzsh_dependencies
 ...
