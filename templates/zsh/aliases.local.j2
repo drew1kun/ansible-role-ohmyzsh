@@ -1,8 +1,8 @@
 #============================ CUSTOM ALIASES ===============================
 {% if ansible_os_family == 'Darwin' or  ansible_os_family == 'FreeBSD' %}
-alias ls='ls -GFha' {# -G - colorize output on BSD #}
+alias ls='ls -GFha'{# -G - colorize output on BSD #}
 {% else %}
-alias ls='ls -Fha' {# -G - do not show Groups on GNU/linux #}
+alias ls='ls -Fha'{# -G - do not show Groups on GNU/linux #}
 {% endif %}
 
 alias ll='ls -ltha'
