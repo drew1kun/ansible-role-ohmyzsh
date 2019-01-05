@@ -9,8 +9,7 @@
   when: item.state is not defined or item.state == "present"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 
 - name: '[users] Create directory structure'
   file:
@@ -22,8 +21,7 @@
   when: item.state is not defined or item.state == "present"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 
 - name: '[users] Generate default aliases'
   template:
@@ -35,8 +33,7 @@
   when: item.state is not defined or item.state == "present"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 
 - name: '[users] Generate custom aliases'
   template:
@@ -48,8 +45,7 @@
   when: item.state is not defined or item.state == "present"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 
 - name: '[users] Generate Powerlevel9k custom configuration'
   copy:
@@ -63,8 +59,7 @@
     - ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 
 - name: '[users] Add custom sudoers config to not reset environment variables when doing `sudo -s` for each zsh user'
   template:
@@ -76,22 +71,19 @@
   when: ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 
 - name: '[users] Set zsh as default shell'
   user: name={{ item.user }} shell=/bin/zsh
   when: item.state is not defined or item.state == "present"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 
 - name: '[users] Set bash as default shell for uninstalled users'
   user: name={{ item.user }} shell=/bin/bash
   when: item.state is defined and item.state == "absent"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
-  tags:
-    - ohmyzsh
+  tags: ohmyzsh
 ...

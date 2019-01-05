@@ -8,5 +8,4 @@
 - name: '[main] Include users.yml playbook for multiple users installation if any users are specified'
   include_tasks: users.yml
   when: ohmyzsh_users | length > 0
-
 ...
