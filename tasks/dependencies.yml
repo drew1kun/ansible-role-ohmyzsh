@@ -27,7 +27,7 @@
   register: ohmyzsh_dep_result
   until: ohmyzsh_dep_result is succeeded
   when:
-  - ohmyzsh_powerlevel9k == true
+  - ohmyzsh_powerlevel9k
   - ansible_os_family == 'Darwin'
   tags:
   - ohmyzsh
