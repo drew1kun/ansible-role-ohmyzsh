@@ -30,8 +30,6 @@
   become: yes
   when: ansible_os_family != 'Darwin'
   tags: ohmyzsh
-  tags:
-    - ohmyzsh
 
 # For Debian and maybe other distros:
 - name: '[install] Set up en_US.UTF-8 locale'
