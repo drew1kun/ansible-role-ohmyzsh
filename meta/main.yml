@@ -9,27 +9,21 @@ galaxy_info:
   github_branch: master
 
   platforms:
-    - name: Ubuntu
-      versions:
-        - all
-    - name: Debian
-      versions:
-        - all
-    - name: MacOSX
-      versions:
-        - all
-
-  categories:
-    - system
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  - name: MacOSX
+    versions:
+    - all
 
   galaxy_tags:
-    - zsh
-    - oh_my_zsh
-    - ohmyzsh
-    - debian
-    - ubuntu
-    - macos
-    - osx
-
-dependencies: []
+  - zsh
+  - ohmyzsh
+  - debian
+  - ubuntu
+  - macos
+  - osx
 ...
