@@ -31,6 +31,7 @@ alias ssh='/usr/bin/ssh -Y'  # This also enables 'UseKeychan' and 'AddKeysToAgen
 {% if ansible_os_family == 'Darwin' %}
 #===================== MacOS specific aliases and functions ================
 alias updatedb='sudo sudo /usr/libexec/locate.updatedb'
+alias airrest='networksetup -setairportpower airport off; networksetup -setairportpower airport on'
 
 alias rbv='echo "rbenv versions:" && \
   rbenv versions && \
