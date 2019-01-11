@@ -14,6 +14,12 @@ alias uuu='cd ../../..'
 alias uuuu='for i in {1..4}; do cd ..; done'
 alias cp='cp -i'
 
+# let vim be nvim:
+nvim_path="$(which nvim)"
+if [ -x "${nvim_path}" ] ; then
+    alias vim="${nvim_path}"
+fi
+
 alias cm='cmatrix -bf -u 9 -C cyan'
 
 alias wgetp='wget -P ~/Downloads/'
@@ -34,41 +40,41 @@ alias updatedb='sudo sudo /usr/libexec/locate.updatedb'
 alias airrest='networksetup -setairportpower airport off; networksetup -setairportpower airport on'
 
 alias rbv='echo "rbenv versions:" && \
-  rbenv versions && \
-  echo "current ruby -v:" && \
-  ruby -v && \
-  echo "System ruby:" && \
-  /usr/bin/ruby -v'
+    rbenv versions && \
+    echo "current ruby -v:" && \
+    ruby -v && \
+    echo "System ruby:" && \
+    /usr/bin/ruby -v'
 
 alias ipa="ipconfig getifaddr"
 
 # return my NAT IP address:
 function myip() {
-  ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
-  ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+    ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 
 cdf () {
-  finderPath=`osascript -e 'tell application "Finder"
-    try
-      set currentFolder to (folder of the front window as alias)
-      on error
-      set currentFolder to (path to desktop folder as alias)
-    end try
-    POSIX path of currentFolder
-    end tell'`;
-  cd "$finderPath"
+    finderPath=`osascript -e 'tell application "Finder"
+        try
+            set currentFolder to (folder of the front window as alias)
+            on error
+            set currentFolder to (path to desktop folder as alias)
+        end try
+        POSIX path of currentFolder
+        end tell'`;
+    cd "$finderPath"
 }
 {% else %}
 alias rbv='echo "rbenv versions:" && \
-  rbenv versions && \
-  echo "current ruby -v:" && \
-  ruby -v'
+    rbenv versions && \
+    echo "current ruby -v:" && \
+    ruby -v'
 
 {% endif %}
 #===========================================================================
