@@ -16,10 +16,10 @@ export TERM="xterm-256color"
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="random"
 ZSH_THEME="{{ item.theme if
-	(item is defined and item.theme is defined and item.theme != 'powerlevel9k/powerlevel9k')
-	or (item is defined and item.theme is defined
-	and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k == true)
-	else ohmyzsh_default_theme }}"
+  (item is defined and item.theme is defined and item.theme != 'powerlevel9k/powerlevel9k')
+  or (item is defined and item.theme is defined
+  and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k == true)
+  else ohmyzsh_default_theme }}"
 
 {% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true %}
 source {{ ohmyzsh_powerlevel9k_cfg }}
@@ -57,10 +57,10 @@ default_plugins=({{ ohmyzsh_default_plugins|join(' ') }})
 {% endif %}
 
 if [ -f $HOME/.zsh/plugins ]; then
-  . $HOME/.zshrc/plugins
-  plugins=( ${default_plugins[@]} ${custom_plugins[@]} )
+    . $HOME/.zshrc/plugins
+    plugins=( ${default_plugins[@]} ${custom_plugins[@]} )
 else
-  plugins=$default_plugins
+    plugins=$default_plugins
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -75,19 +75,19 @@ export LANG=en_US.UTF-8
 
 # Load aliases
 if [ -f $HOME/.zsh/aliases ]; then
-  source $HOME/.zsh/aliases
+    source $HOME/.zsh/aliases
 fi
 
 # Load custom configs
 if [ -d $HOME/.zsh/conf.d ]; then
-  for i in $HOME/.zsh/conf.d/*.sh; do
-    if [ -r $i ]; then
-      . $i
-    fi
-  done
+    for i in $HOME/.zsh/conf.d/*.sh; do
+        if [ -r $i ]; then
+            . $i
+        fi
+    done
 fi
 
 # Load Rails environment variables if present
 if [ -f $HOME/.rails.env ]; then
-  source $HOME/.rails.env
+    source $HOME/.rails.env
 fi
