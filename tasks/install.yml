@@ -1,8 +1,4 @@
 ---
-- name: '[install] Include {{ ansible_os_family }}-specific variables'
-  include_vars: "{{ ansible_os_family }}.yml"
-  tags: ohmyzsh
-
 - name: '[install] Clone oh-my-zsh repo'
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git

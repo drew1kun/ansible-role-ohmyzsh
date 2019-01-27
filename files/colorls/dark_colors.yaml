@@ -1,0 +1,39 @@
+# Main Colors
+unrecognized_file: white
+recognized_file:   green
+dir:               blue
+
+# Link (shows up onli in '-l' mode)
+dead_link: red
+link:      seagreen
+
+# Access Modes
+write:     yellow
+read:      green
+exec:      red
+no_access: indianred
+
+# Age
+day_old:     yellow
+hour_old:    orange
+no_modifier: cyan
+
+# File Size
+file_large:  orange
+file_medium: white
+file_small: green
+
+# Random
+report: white
+user:   orange
+tree:   cyan
+empty:  blue
+error:  red
+normal: yellow
+
+# Git
+addition:     chartreuse
+modification: darkkhaki
+deletion:     darkred
+untracked:    darkorange
+unchanged:    forestgreen

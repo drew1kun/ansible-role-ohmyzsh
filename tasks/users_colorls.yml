@@ -1,0 +1,54 @@
+---
+# This is how it must be done (but this specific gem is not being installed):
+#- name: '[users_colorls] Install colorls ruby gem'
+#  gem:
+#    name: colorls
+#    state: present
+#    user_install: no
+#  become: yes
+#  register: ohmyzsh_colorls_result
+#  until: ohmyzsh_colorls_result is succeeded
+#  tags: ohmyzsh
+#
+# Ugly workaround:
+- name: '[users_colorls] Check if colorls is installed'
+  stat: path=/usr/local/bin/colorls
+  register: ohmyzsh_colorls
+  tags: ohmyzsh
+
+- name: '[users_colorls] Install colorls ruby gem'
+  command: gem install colorls
+  become: yes
+  register: ohmyzsh_colorls_result
+  until: ohmyzsh_colorls_result is succeeded
+  when: not ohmyzsh_colorls.stat.exists
+  tags: ohmyzsh
+
+
+- name: '[users_colorls] Ensure the configuration directory exists for all users'
+  file:
+    path: ~/.config/colorls
+    state: directory
+  become: yes
+  become_user: "{{ item.user }}"
+  with_items: "{{ ohmyzsh_users }}"
+  when:
+  - ohmyzsh_users | length > 1
+  - item.colorls
+  tags: ohmyzsh
+
+- name: '[users_colorls] Copy custom colorls configuration'
+  copy:
+    src: colorls/
+    dest: ~/.config/colorls/
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+    mode: 0644
+  become: yes
+  become_user: "{{ item.user }}"
+  with_items: "{{ ohmyzsh_users }}"
+  when:
+  - ohmyzsh_users | length > 1
+  - item.colorls
+  tags: ohmyzsh
+...

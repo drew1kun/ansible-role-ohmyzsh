@@ -12,12 +12,14 @@ ohmyzsh_users:
 #    ssh_ids: []                      # list of SSH ids to add to ohmyzsh ssh manager plugin
 #    plugins: []                      # list of ohmyzsh plugins to install
     state: present                    # present or absent, to install/uninstall
+    colorls: yes                      # Install colorls ruby gem
 
   - user: root
     theme: powerlevel9k/powerlevel9k
 #    ssh_ids: []
 #    plugins: []
     state: present
+    colorls: no                       # Install colorls ruby gem
 
 ohmyzsh_default_theme: 'robbyrussell'
 

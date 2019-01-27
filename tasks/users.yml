@@ -6,7 +6,7 @@
     mode: 0644
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
-  when: item.state is not defined or item.state == "present"
+  when: "item.state is not defined or 'present'in item.state"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
@@ -18,7 +18,7 @@
     recurse: yes
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
-  when: item.state is not defined or item.state == "present"
+  when: "item.state is not defined or 'present'in item.state"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
@@ -30,7 +30,7 @@
     mode: 0644
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
-  when: item.state is not defined or item.state == "present"
+  when: "item.state is not defined or 'present'in item.state"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
@@ -42,7 +42,7 @@
     mode: 0644
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
-  when: item.state is not defined or item.state == "present"
+  when: "item.state is not defined or 'present'in item.state"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
@@ -55,8 +55,9 @@
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
   when:
-    - item.state is not defined or item.state == "present"
-    - ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k
+  - "item.state is not defined or 'present'in item.state"
+  - ohmyzsh_powerlevel9k is defined
+  - ohmyzsh_powerlevel9k
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
@@ -68,21 +69,25 @@
     mode: 0440
     owner: root
     group: "{{ 'root' if ansible_os_family != 'Darwin' else 'wheel' }}"
-  when: ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k
+  when:
+  - ohmyzsh_powerlevel9k is defined
+  - ohmyzsh_powerlevel9k
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
 
 - name: '[users] Set zsh as default shell'
   user: name={{ item.user }} shell=/bin/zsh
-  when: item.state is not defined or item.state == "present"
+  when: "item.state is not defined or 'present'in item.state"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
 
 - name: '[users] Set bash as default shell for uninstalled users'
   user: name={{ item.user }} shell=/bin/bash
-  when: item.state is defined and item.state == "absent"
+  when:
+  - item.state is defined
+  - "'absent' in item.state"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh

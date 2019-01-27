@@ -2,11 +2,11 @@
 
 colorls_path="$(which colorls)"
 if [ -x "${colorls_path}" ] ; then
-    alias l='colorls'
-    alias ls='l -a'
-    alias ll='l -lta'
-    alias la='l -A'
-    alias lg='l --gs'
+    alias ls='colorls'
+    alias l='ls -a'
+    alias ll='ls -lta'
+    alias la='ls -A'
+    alias lg='ls --gs'
 else
 {% if ansible_os_family == 'Darwin' or  ansible_os_family == 'FreeBSD' %}
     alias ls='ls -GFha'{# -G - colorize output on BSD #}
