@@ -6,7 +6,7 @@
   become: yes  # disable this for MacOS
   register: ohmyzsh_dep_result
   until: ohmyzsh_dep_result is succeeded
-  when: ansible_os_family != 'Darwin'
+  when: "'Darwin' not in ansible_os_family"
   tags:
   - ohmyzsh
   - ohmyzsh_dependencies
@@ -15,7 +15,7 @@
   apt: name=locales state=present
   register: ohmyzsh_dep_result
   until: ohmyzsh_dep_result is succeeded
-  when: ansible_os_family == 'Debian'
+  when: "'Darwin' in ansible_os_family"
   tags:
   - ohmyzsh
   - ohmyzsh_dependencies
@@ -28,7 +28,7 @@
   until: ohmyzsh_dep_result is succeeded
   when:
   - ohmyzsh_powerlevel9k
-  - ansible_os_family == 'Darwin'
+  - "'Darwin' in ansible_os_family"
   tags:
   - ohmyzsh
   - ohmyzsh_dependencies
@@ -44,7 +44,7 @@
   become: no
   register: ohmyzsh_dep_result
   until: ohmyzsh_dep_result is succeeded
-  when: ansible_os_family == 'Darwin'
+  when: "'Darwin' in ansible_os_family"
   tags:
   - ohmyzsh
   - ohmyzsh_dependencies

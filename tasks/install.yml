@@ -26,7 +26,7 @@
     owner: root
     group: root
   become: yes
-  when: ansible_os_family != 'Darwin'
+  when: "'Darwin' not in ansible_os_family"
   tags: ohmyzsh
 
 # For Debian and maybe other distros:
@@ -35,8 +35,8 @@
     name: en_US.UTF-8
     state: present
   when:
-  - ansible_os_family != 'Darwin'
-  - ansible_os_family != 'RedHat'
+  - "'Darwin' not in ansible_os_family"
+  - "'RedHat' not in ansible_os_family"
   become: yes
   tags: ohmyzsh
 ...
