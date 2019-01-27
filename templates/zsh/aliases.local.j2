@@ -1,11 +1,20 @@
 #============================ CUSTOM ALIASES ===============================
-{% if ansible_os_family == 'Darwin' or  ansible_os_family == 'FreeBSD' %}
-alias ls='ls -GFha'{# -G - colorize output on BSD #}
-{% else %}
-alias ls='ls -Fha'{# -G - do not show Groups on GNU/linux #}
-{% endif %}
 
-alias ll='ls -ltha'
+colorls_path="$(which colorls)"
+if [ -x "${colorls_path}" ] ; then
+    alias l='colorls'
+    alias ls='l -a'
+    alias ll='l -lta'
+    alias la='l -A'
+    alias lg='l --gs'
+else
+{% if ansible_os_family == 'Darwin' or  ansible_os_family == 'FreeBSD' %}
+    alias ls='ls -GFha'{# -G - colorize output on BSD #}
+{% else %}
+    alias ls='ls -Fha'{# -G - do not show Groups on GNU/linux #}
+{% endif %}
+    alias ll='ls -ltha'
+fi
 
 alias su='su -'
 alias u='cd ..'
