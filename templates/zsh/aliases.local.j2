@@ -1,5 +1,4 @@
 #============================ CUSTOM ALIASES ===============================
-
 colorls_path="$(which colorls)"
 if [ -x "${colorls_path}" ] ; then
     alias ls='colorls'
@@ -44,6 +43,8 @@ alias ssh='/usr/bin/ssh -Y'  # This also enables 'UseKeychan' and 'AddKeysToAgen
                              # -Y - use X11 Forwarding by default (works on Linux only)
 
 {% if ansible_os_family == 'Darwin' %}
+#===========================================================================
+
 #===================== MacOS specific aliases and functions ================
 alias updatedb='sudo sudo /usr/libexec/locate.updatedb'
 alias airrest='networksetup -setairportpower airport off; networksetup -setairportpower airport on'
