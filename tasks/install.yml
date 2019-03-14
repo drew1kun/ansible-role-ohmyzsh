@@ -18,6 +18,33 @@
   when: ohmyzsh_powerlevel9k is defined and true
   tags: ohmyzsh
 
+- name: '[install] Make it fish-like: Clone zsh-autosuggestions plugin'
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "{{ ohmyzsh_install_dir }}/custom/plugins/zsh-autosuggestions"
+    version: master
+    update: yes
+  become: yes
+  tags: ohmyzsh
+
+- name: '[install] Make it fish-like: Clone zsh-history-substring-search plugin'
+  git:
+    repo: https://github.com/zsh-users/zsh-history-substring-search
+    dest: "{{ ohmyzsh_install_dir }}/custom/plugins/zsh-history-substring-search"
+    version: master
+    update: yes
+  become: yes
+  tags: ohmyzsh
+
+- name: '[install] Make it fish-like: Clone zsh-syntax-highlighting plugin'
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ ohmyzsh_install_dir }}/custom/plugins/zsh-syntax-highlighting"
+    version: master
+    update: yes
+  become: yes
+  tags: ohmyzsh
+
 - name: '[install] Setup zprofile for zsh'
   template:
     src: zprofile.j2

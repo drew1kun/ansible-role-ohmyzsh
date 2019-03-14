@@ -63,6 +63,11 @@ else
     plugins=$default_plugins
 fi
 
+
+# Make zsh look like fish:
+plugins=(zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
