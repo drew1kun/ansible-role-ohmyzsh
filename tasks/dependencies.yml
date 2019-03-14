@@ -15,7 +15,7 @@
   apt: name=locales state=present
   register: ohmyzsh_dep_result
   until: ohmyzsh_dep_result is succeeded
-  when: "'Darwin' in ansible_os_family"
+  when: "'Debian' in ansible_os_family"
   tags:
   - ohmyzsh
   - ohmyzsh_dependencies
