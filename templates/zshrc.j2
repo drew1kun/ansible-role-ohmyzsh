@@ -1,7 +1,7 @@
 # This file is managed by Ansible, all changes will be lost
 
 # Path to your oh-my-zsh configuration.
-ZSH={{ ohmyzsh_install_dir }}
+ZSH="{{ ohmyzsh_install_dir }}"
 
 # Colorize output
 export CLICOLOR=1
@@ -22,7 +22,7 @@ ZSH_THEME="{{ item.theme if
   else ohmyzsh_default_theme }}"
 
 {% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true %}
-source {{ ohmyzsh_powerlevel9k_cfg }}
+source "{{ ohmyzsh_powerlevel9k_cfg }}"
 {% endif %}
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -56,43 +56,53 @@ default_plugins=({{ (ohmyzsh_default_plugins|list + item.plugins|list)|join(' ')
 default_plugins=({{ ohmyzsh_default_plugins|join(' ') }})
 {% endif %}
 
-if [ -f $HOME/.zsh/plugins ]; then
-    . $HOME/.zshrc/plugins
+{% if item is defined and item.plugins is defined %}
+custom_plugins=({{ (ohmyzsh_custom_plugins|list + item.plugins|list)|join(' ') }})
+{% else %}
+custom_plugins=({{ ohmyzsh_custom_plugins|join(' ') }})
+{% endif %}
+
+if [[ -f "${HOME}/.zsh/plugins" ]]; then
+    . "${HOME}/.zshrc/plugins"
+    plugins=( ${default_plugins[@]} ${custom_plugins[@]} )
+elif [[ -d "${ZSH}/custom/plugins" ]]; then
     plugins=( ${default_plugins[@]} ${custom_plugins[@]} )
 else
-    plugins=$default_plugins
+    plugins=${default_plugins}
 fi
 
-
+{% if 'zsh-syntax-highlighting' in ohmyzsh_custom_plugins %}
 # Make zsh look like fish:
-plugins=(zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
+{% endif %}
 
-source $ZSH/oh-my-zsh.sh
+source "${ZSH}/oh-my-zsh.sh"
 
 # Customize to your needs...
-export PATH=$HOME/.local/bin:$PATH
+export PATH="${HOME}/.local/bin:$PATH"
 
 export EDITOR=vim visudo
-export SHELL=zsh
-export LC_TYPE=en_US.UTF-8
-export LANG=en_US.UTF-8
+export SHELL="/usr/local/bin/zsh"
+export LC_TYPE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
 
 # Load aliases
-if [ -f $HOME/.zsh/aliases ]; then
-    source $HOME/.zsh/aliases
+if [ -f "${HOME}/.zsh/aliases" ]; then
+    source "${HOME}/.zsh/aliases"
 fi
 
 # Load custom configs
-if [ -d $HOME/.zsh/conf.d ]; then
-    for i in $HOME/.zsh/conf.d/*.sh; do
-        if [ -r $i ]; then
-            . $i
+if [ -d "${HOME}/.zsh/conf.d" ]; then
+    for i in "${HOME}/.zsh/conf.d/*.sh"; do
+        if [ -r "${i}" ]; then
+            . "${i}"
         fi
     done
 fi
 
 # Load Rails environment variables if present
-if [ -f $HOME/.rails.env ]; then
-    source $HOME/.rails.env
+if [ -f "${HOME}/.rails.env" ]; then
+    source "${HOME}/.rails.env"
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -25,22 +25,30 @@ ohmyzsh_default_theme: 'robbyrussell'
 
 ohmyzsh_default_plugins:
   - tmux
-  - ssh-agent
   - vagrant
   - cp
-  - comand-not-found
   - gnu-utils
   - history
   - python
   - pip
-  - git
-  - git-extras
+#  - git
+#  - git-extras
+#  - ssh-agent  # adds ssh keys to agent upon shell start
+#  - comand-not-found  # this plugin causes problems sometimes
 #  - svn
 #  - mercurial
-#  - osx
-#  - brew
+  - osx
+  - brew
 #  - rails
 #  - ruby
 #  - bundle
 #  - rvm
+
+ohmyzsh_custom_plugins:
+#  Make zsh behave as fish:
+#  These three must be in following order:
+#  zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting
+  - zsh-autosuggestions
+  - zsh-history-substring-search
+  - zsh-syntax-highlighting
 ...
