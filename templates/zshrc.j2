@@ -3,6 +3,9 @@
 # Path to your oh-my-zsh configuration.
 ZSH="{{ ohmyzsh_install_dir }}"
 
+# Disable odd message regading completions on mac when doing 'sudo su'
+ZSH_DISABLE_COMPFIX=true
+
 # Colorize output
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
