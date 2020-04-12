@@ -1,12 +1,15 @@
 ---
 - name: '[main] Include {{ ansible_os_family }}-specific variables'
   include_vars: "{{ ansible_os_family }}.yml"
+  tags: ohmyzsh
 
-- name: '[main] Include dependencies installation tasks'
-  include_tasks: dependencies.yml
+- name: '[main] Import dependencies installation tasks'
+  import_tasks: dependencies.yml
+  tags: ohmyzsh
 
-- name: '[main] Include installation tasks'
-  include_tasks: install.yml
+- name: '[main] Import installation tasks'
+  import_tasks: install.yml
+  tags: ohmyzsh
 
 # Must go before ohmyzsh configuration, in order to setup correct aliases
 - name: '[main] Include users_colorls.yml tasks for per-user installation if any users are specified'
@@ -15,10 +18,12 @@
   - ohmyzsh_users is defined
   - ohmyzsh_users | length > 0
   - ohmyzsh_users | selectattr('colorls','equalto',True) | list | count > 0
+  tags: ohmyzsh
 
 - name: '[main] Include users.yml tasks for multiple users installation if any users are specified'
   include_tasks: users.yml
   when:
   - ohmyzsh_users is defined
   - ohmyzsh_users | length > 0
+  tags: ohmyzsh
 ...
