@@ -31,7 +31,7 @@ source "{{ ohmyzsh_powerlevel9k_cfg }}"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+# DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -47,6 +47,7 @@ DISABLE_AUTO_UPDATE="true"
 
 {% if item is defined and item.ssh_ids is defined %}
 # SSH ids
+zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent identities {{ item.ssh_ids|join(' ') }}
 {% endif %}
 
@@ -74,15 +75,16 @@ else
     plugins=${default_plugins}
 fi
 
-{% if 'zsh-syntax-highlighting' in ohmyzsh_custom_plugins %}
-# Make zsh look like fish:
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
-{% endif %}
+if (( ! ${fpath[(I)/usr/local/share/zsh/site-functions]} )); then
+  FPATH=/usr/local/share/zsh/site-functions:$FPATH
+fi
 
 source "${ZSH}/oh-my-zsh.sh"
 
 # Customize to your needs...
 export PATH="${HOME}/.local/bin:$PATH"
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export GPG_TTY=$(tty)
 
 export EDITOR=vim visudo
 export SHELL="/usr/local/bin/zsh"
@@ -101,11 +103,6 @@ if [ -d "${HOME}/.zsh/conf.d" ]; then
             . "${i}"
         fi
     done
-fi
-
-# Load Rails environment variables if present
-if [ -f "${HOME}/.rails.env" ]; then
-    source "${HOME}/.rails.env"
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

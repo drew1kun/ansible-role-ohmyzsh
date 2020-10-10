@@ -33,7 +33,7 @@
   - ohmyzsh
   - ohmyzsh_dependencies
 
-- name: '[dependencies] Install zsh for MacOS; install_options: --with-unicode9, --without-etcdir'
+- name: '[dependencies] Install zsh for MacOS'
   homebrew:
     name: zsh
     state: present

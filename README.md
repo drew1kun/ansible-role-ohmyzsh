@@ -66,7 +66,7 @@ Example Playbook
   gather_facts: yes
   roles:
   - drew-kun.homebrew
-  - drew-kun.ohmyzsh
+  - <CHANGE_IT>.ohmyzsh
 ```
 
 License
@@ -76,7 +76,7 @@ License
 
 Author Information
 ------------------
-
+#TODO change it
 Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 
 [role-badge]: https://img.shields.io/badge/role-drew--kun.ohmyzsh-green.svg
