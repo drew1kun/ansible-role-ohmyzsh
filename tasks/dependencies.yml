@@ -35,9 +35,6 @@
 
 - name: '[dependencies] Install zsh for MacOS; install_options: --with-unicode9, --without-etcdir'
   homebrew:
-    install_options:
-    - 'with-unicode9'
-    - 'without-etcdir'
     name: zsh
     state: present
     update_homebrew: yes
