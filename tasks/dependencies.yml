@@ -46,7 +46,26 @@
 
 - name: '[dependencies] Install fzf useful key bindings and fuzzy completion'
   shell: $(brew --prefix)/opt/fzf/install --key-bindings --completion --update-rc
-  become: no  # always the case with homebrew
+  register: ohmyzsh_dep_result
+  until: ohmyzsh_dep_result is succeeded
+  when:
+  - "'Darwin' in ansible_os_family"
+  tags:
+  - ohmyzsh
+  - ohmyzsh_dependencies
+
+- name: '[dependencies] Add powerlevel10k to the list of Oh My Zsh themes.'
+  shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  register: ohmyzsh_dep_result
+  until: ohmyzsh_dep_result is succeeded
+  when:
+  - "'Darwin' in ansible_os_family"
+  tags:
+  - ohmyzsh
+  - ohmyzsh_dependencies
+
+- name: '[dependencies] Configure powerlevel10k'
+  shell: p10k configure
   register: ohmyzsh_dep_result
   until: ohmyzsh_dep_result is succeeded
   when:

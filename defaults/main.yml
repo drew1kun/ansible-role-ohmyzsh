@@ -8,14 +8,14 @@ ohmyzsh_powerlevel9k_cfg: $HOME/.zsh/omz_powerlevel9k.cfg
 
 ohmyzsh_users:
   - user: "{{ ansible_user_id }}"     # user name
-    theme: powerlevel9k/powerlevel9k  # ohmyzsh theme; use "random" for random theme
+    theme: powerlevel10k/powerlevel10k  # ohmyzsh theme; use "random" for random theme
 #    ssh_ids: []                      # list of SSH ids to add to ohmyzsh ssh manager plugin
 #    plugins: []                      # list of ohmyzsh plugins to install
     state: present                    # present or absent, to install/uninstall
     colorls: yes                      # Install colorls ruby gem
 
   - user: root
-    theme: powerlevel9k/powerlevel9k
+    theme: powerlevel10k/powerlevel10k
 #    ssh_ids: []
 #    plugins: []
     state: present

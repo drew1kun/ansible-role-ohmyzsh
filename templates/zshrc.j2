@@ -21,7 +21,8 @@ export TERM="xterm-256color"
 ZSH_THEME="{{ item.theme if
   (item is defined and item.theme is defined and item.theme != 'powerlevel9k/powerlevel9k')
   or (item is defined and item.theme is defined
-  and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k == true)
+  and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k == true) or (item is defined and item.theme is defined
+  and item.theme == 'powerlevel10k/powerlevel10k' and ohmyzsh_powerlevel9k == true)
   else ohmyzsh_default_theme }}"
 
 {% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true %}
