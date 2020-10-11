@@ -56,6 +56,7 @@
 
 - name: '[dependencies] Add powerlevel10k to the list of Oh My Zsh themes.'
   shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  become: yes
   register: ohmyzsh_dep_result
   until: ohmyzsh_dep_result is succeeded
   when:
