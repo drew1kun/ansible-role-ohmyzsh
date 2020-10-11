@@ -18,6 +18,24 @@
   when: ohmyzsh_powerlevel9k is defined and true
   tags: ohmyzsh
 
+- name: '[install] Clone powerlevel10k theme to custom directory'
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ ohmyzsh_install_dir }}/custom/powerlevel10k"
+    version: master
+    update: yes
+  become: yes
+  when: ohmyzsh_powerlevel9k is defined and true
+  tags: ohmyzsh
+
+- name: '[install] Configure powerlevel10k'
+  shell: p10k configure
+  register: ohmyzsh_dep_result
+  until: ohmyzsh_dep_result is succeeded
+  become: yes
+  when: ohmyzsh_powerlevel9k is defined and true
+  tags: ohmyzsh
+
 - name: '[install] Make it fish-like: Clone zsh-autosuggestions plugin'
   git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
