@@ -22,6 +22,8 @@ ZSH_THEME="{{ item.theme if
   (item is defined and item.theme is defined and item.theme != 'powerlevel9k/powerlevel9k')
   or (item is defined and item.theme is defined
   and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k == true)
+  or (item is defined and item.theme is defined
+  and item.theme == 'powerlevel10k/powerlevel10k' and ohmyzsh_powerlevel9k == true)
   else ohmyzsh_default_theme }}"
 
 {% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true %}
@@ -31,7 +33,7 @@ source "{{ ohmyzsh_powerlevel9k_cfg }}"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+#DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -47,7 +49,9 @@ DISABLE_AUTO_UPDATE="true"
 
 {% if item is defined and item.ssh_ids is defined %}
 # SSH ids
+zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent identities {{ item.ssh_ids|join(' ') }}
+
 {% endif %}
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -79,10 +83,15 @@ fi
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 {% endif %}
 
+if (( ! ${fpath[(I)/usr/local/share/zsh/site-functions]} )); then
+  FPATH=/usr/local/share/zsh/site-functions:$FPATH
+fi
+
 source "${ZSH}/oh-my-zsh.sh"
 
 # Customize to your needs...
-export PATH="${HOME}/.local/bin:$PATH"
+export PATH="${HOME}/.local/bin:${HOME}/bin::${PATH}"
+export GPG_TTY=$(tty)
 
 export EDITOR=vim visudo
 export SHELL="/usr/local/bin/zsh"
