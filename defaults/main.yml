@@ -1,6 +1,7 @@
 ---
-ohmyzsh_install_dir: /usr/local/share/ohmyzsh
-
+ohmyzsh_install_dir: /usr/local/share/ohmyzsh   # On MacOS /usr/ is read-only, therefore,
+                                                # specify ohmyzsh_cache_dir var for correct work of completions.
+ohmyzsh_cache_dir: $HOME/.ohmyzsh_cache         # This dir has to be writable. Mainly for macos, as /usr/ is read-only
 ohmyzsh_custom_aliases: $HOME/.zsh/aliases.local
 
 # If only p10k is set to yes, then p9k will not be installed and configured.
@@ -9,46 +10,30 @@ ohmyzsh_custom_aliases: $HOME/.zsh/aliases.local
 # If installed both, but want to turn p9k off, then comment the following line in ~/.zshrc:
 #   source ${HOME}/.zsh/omz_powerlevel9k.cfg
 ohmyzsh_powerlevel10k: yes
-ohmyzsh_powerlevel9k: yes             # yes - use p9k prompt style | no - use p10k prompt style
+ohmyzsh_powerlevel9k: no              # yes - use p9k prompt style | no - use p10k prompt style
 ohmyzsh_powerlevel9k_cfg: ${HOME}/.zsh/omz_powerlevel9k.cfg
+
+ohmyzsh_default_theme: 'robbyrussell' # default fallback theme
 
 ohmyzsh_users:
 - user: "{{ ansible_user_id }}"       # user name
   theme: powerlevel10k/powerlevel10k  # ohmyzsh theme; use "random" for random theme
-#  ssh_ids: []                        # list of SSH ids to add to ohmyzsh ssh manager plugin
-#  plugins: []                        # list of ohmyzsh plugins to install
+  ssh_ids: []                         # list of SSH ids to add to ohmyzsh ssh manager plugin
   state: present                      # present or absent, to install/uninstall
   colorls: yes                        # Install colorls ruby gem
+  plugins:
+  - sudo                              # Prefix current or previous command with sudo by pressing Esc twice
 
 - user: root
   theme: powerlevel10k/powerlevel10k
-#  ssh_ids: []
-#  plugins: []
+  ssh_ids: []
   state: present
   colorls: no                         # Install colorls ruby gem
 
-ohmyzsh_default_theme: 'robbyrussell'
-
 ohmyzsh_default_plugins:
-- tmux
-- vagrant
-- cp
-- gnu-utils
-- history
-- python
-- pip
-#- git
-#- git-extras
-#- ssh-agent  # adds ssh keys to agent upon shell start
-#- comand-not-found  # this plugin causes problems sometimes
-#- svn
-#- mercurial
-- osx
-- brew
-#- rails
-#- ruby
-#- bundle
-#- rvm
+- cp          # User rsync instead of cp
+- gnu-utils   # Link unix utilites to `g`-named ones (ghead, gsed etc.)
+- tmux        # Tmux aliases + configuration
 
 ohmyzsh_custom_plugins:
 #  Make zsh behave as fish:

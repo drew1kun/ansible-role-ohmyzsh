@@ -1,10 +1,25 @@
 # This file is managed by Ansible, all changes will be lost
 
+# Automatically start tmux when starting new shell
+{% if 'tmux' in (ohmyzsh_default_plugins|default|list + item.plugins|default|list) %}
+ZSH_TMUX_AUTOSTART=false  # true - will start tmux automatically ATTACHED TO CURRENT SESSION!
+{% endif %}
+{% if 'Darwin' in ansible_os_family %}
+if [ "$TMUX" = "" ]; then tmux; fi
+{% else %}
+xterm -e tmux
+{% endif %}
+
 # Path to your oh-my-zsh configuration.
 ZSH="{{ ohmyzsh_install_dir }}"
 
 # Disable odd message regading completions on mac when doing 'sudo su'
 ZSH_DISABLE_COMPFIX=true
+
+{% if 'Darwin' in ansible_os_family %}
+# Specify custom ohmyzsh cache, because on mac /usr/ dir is read-only:
+ZSH_CACHE_DIR="{{ ohmyzsh_cache_dir }}"
+{% endif %}
 
 # Colorize output
 export CLICOLOR=1
@@ -57,18 +72,22 @@ zstyle :omz:plugins:ssh-agent identities {{ item.ssh_ids|join(' ') }}
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format:count plugins=(rails git textmate ruby lighthouse)
-{% if item is defined and item.plugins is defined %}
-default_plugins=({{ (ohmyzsh_default_plugins|list + item.plugins|list)|join(' ') }})
-{% else %}
-default_plugins=({{ ohmyzsh_default_plugins|join(' ') }})
-{% endif %}
+{% if ohmyzsh_default_plugins is defined or (item is defined and item.plugins is defined) %}
+default_plugins=(
+{% for plugin in (ohmyzsh_default_plugins|default|list + item.plugins|default|list) %}
+    {{ plugin }}
+{% endfor %}
+)
 
-{% if item is defined and item.plugins is defined %}
-custom_plugins=({{ (ohmyzsh_custom_plugins|list + item.plugins|list)|join(' ') }})
-{% else %}
-custom_plugins=({{ ohmyzsh_custom_plugins|join(' ') }})
 {% endif %}
+{% if ohmyzsh_custom_plugins is defined %}
+custom_plugins=(
+{% for plugin in ohmyzsh_custom_plugins|list %}
+    {{ plugin }}
+{% endfor %}
+)
 
+{% endif %}
 if [[ -f "${HOME}/.zsh/plugins" ]]; then
     . "${HOME}/.zshrc/plugins"
     plugins=( ${default_plugins[@]} ${custom_plugins[@]} )
@@ -78,7 +97,7 @@ else
     plugins=${default_plugins}
 fi
 
-{% if 'zsh-syntax-highlighting' in ohmyzsh_custom_plugins %}
+{% if 'zsh-syntax-highlighting' in ohmyzsh_custom_plugins|default|list %}
 # Make zsh look like fish:
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 {% endif %}
@@ -88,11 +107,16 @@ if (( ! ${fpath[(I)/usr/local/share/zsh/site-functions]} )); then
 fi
 
 source "${ZSH}/oh-my-zsh.sh"
+{% if 'kubectl' in (ohmyzsh_default_plugins|default|list + item.plugins|default|list) %}
+source <(kubectl completion zsh)
+{% endif %}
 
 # Customize to your needs...
-export PATH="${HOME}/.local/bin:${HOME}/bin::${PATH}"
+export PATH="${HOME}/.local/bin:${HOME}/bin::${PATH}"   # User-wide installed binaries
+export PATH="${PATH}:${HOME}/.krew/bin"                 # Binaries installed with krew
+export PATH="$(brew --prefix)/opt/libpq/bin:${PATH}"    # libpg binaries
+export PATH="$(brew --prefix openvpn)/sbin:${PATH}"     # Binaries installed with brew
 export GPG_TTY=$(tty)
-
 export EDITOR=vim visudo
 export SHELL="/usr/local/bin/zsh"
 export LC_TYPE="en_US.UTF-8"
@@ -117,4 +141,15 @@ if [ -f "${HOME}/.rails.env" ]; then
     source "${HOME}/.rails.env"
 fi
 
+{% if ohmyzsh_powerlevel10k|default(false) %}
+# Source the existing p10k config (if it exists)
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+{% endif %}
+# Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Added with `terraform -install-autocomplete` command.
+# If terraform autocompletions do not work, remove these lines and reissue the command
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform

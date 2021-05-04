@@ -1,4 +1,18 @@
 ---
+- name: '[users] Create ohmyzsh cache directory on Darwin'
+  file:
+    path: "{{ ohmyzsh_cache_dir }}"
+    state: directory
+    mode: 0644
+    owner: "{{ item.user }}"
+    group: "{{ 'wheel' if item.user == 'root' else 'staff' }}"
+  when:
+  - "item.state is not defined or 'present'in item.state"
+  - "'Darwin' in ansible_os_family"
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags: ohmyzsh
+
 - name: '[users] Copy default zshrc to user home directory'
   template:
     src: zshrc.j2
