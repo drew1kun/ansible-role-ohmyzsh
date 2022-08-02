@@ -61,6 +61,7 @@
   become: yes
   tags: ohmyzsh
 
+# Powerlevel9k
 - name: '[users] Generate Powerlevel9k custom configuration'
   copy:
     src: omz_powerlevel9k.cfg
@@ -90,6 +91,24 @@
   become: yes
   tags: ohmyzsh
 
+# Powerlevel10k
+- name: '[users] Generate Powerlevel10k custom configuration'
+  copy:
+    src: p10k.zsh
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.p10k.zsh"
+    mode: 0644
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+  when:
+  - "item.state is not defined or 'present'in item.state"
+  - ohmyzsh_powerlevel10k is defined
+  - ohmyzsh_powerlevel10k
+  - ohmyzsh_powerlevel10k_import_config
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags: ohmyzsh
+
+# Post setup
 - name: '[users] Set zsh as default shell'
   user: name={{ item.user }} shell=/bin/zsh
   when: "item.state is not defined or 'present'in item.state"

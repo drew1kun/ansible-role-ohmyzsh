@@ -10,6 +10,7 @@ ohmyzsh_custom_aliases: $HOME/.zsh/aliases.local
 # If installed both, but want to turn p9k off, then comment the following line in ~/.zshrc:
 #   source ${HOME}/.zsh/omz_powerlevel9k.cfg
 ohmyzsh_powerlevel10k: yes
+ohmyzsh_powerlevel10k_import_config: no
 ohmyzsh_powerlevel9k: no              # yes - use p9k prompt style | no - use p10k prompt style
 ohmyzsh_powerlevel9k_cfg: ${HOME}/.zsh/omz_powerlevel9k.cfg
 
