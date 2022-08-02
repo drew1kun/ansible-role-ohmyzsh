@@ -108,6 +108,54 @@
   become: yes
   tags: ohmyzsh
 
+# Tmux
+- name: '[users] Install tmux for Linux'
+  package:
+    name: tmux
+    state: present
+  become: yes  # disable this for MacOS
+  register: ohmyzsh_tmux_result
+  until: ohmyzsh_tmux_result is succeeded
+  when:
+  - "'Darwin' not in ansible_os_family"
+  - ohmyzsh_setup_tmux is defined
+  - ohmyzsh_setup_tmux
+  tags:
+  - ohmyzsh
+  - ohmyzsh_tmux
+
+- name: '[users] Install tmux for MacOS'
+  homebrew:
+    name: tmux
+    state: present
+  become: no  # always the case with homebrew
+  register: ohmyzsh_tmux_result
+  until: ohmyzsh_tmux_result is succeeded
+  when:
+  - "'Darwin' in ansible_os_family"
+  - ohmyzsh_setup_tmux is defined
+  - ohmyzsh_setup_tmux
+  tags:
+  - ohmyzsh
+  - ohmyzsh_tmux
+
+- name: '[users] Generate tmux custom configuration'
+  copy:
+    src: tmux.conf
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.tmux.conf"
+    mode: 0644
+    owner: "{{ item.user }}"
+    group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
+  when:
+  - "item.state is not defined or 'present'in item.state"
+  - ohmyzsh_setup_tmux is defined
+  - ohmyzsh_setup_tmux
+  with_items: "{{ ohmyzsh_users }}"
+  become: yes
+  tags:
+  - ohmyzsh
+  - ohmyzsh_tmux
+
 # Post setup
 - name: '[users] Set zsh as default shell'
   user: name={{ item.user }} shell=/bin/zsh

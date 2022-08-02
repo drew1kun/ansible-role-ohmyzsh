@@ -1,5 +1,6 @@
 # This file is managed by Ansible, all changes will be lost
 
+{% if ohmyzsh_setup_tmux is defined and ohmyzsh_setup_tmux is sameas true %}
 # Automatically start tmux when starting new shell
 {% if 'tmux' in (ohmyzsh_default_plugins|default|list + item.plugins|default|list) %}
 ZSH_TMUX_AUTOSTART=false  # true - will start tmux automatically ATTACHED TO CURRENT SESSION!
@@ -8,6 +9,7 @@ ZSH_TMUX_AUTOSTART=false  # true - will start tmux automatically ATTACHED TO CUR
 if [ "$TMUX" = "" ]; then tmux; fi
 {% else %}
 xterm -e tmux
+{% endif %}
 {% endif %}
 
 # Path to your oh-my-zsh configuration.
@@ -36,12 +38,12 @@ export TERM="xterm-256color"
 ZSH_THEME="{{ item.theme if
   (item is defined and item.theme is defined and item.theme != 'powerlevel9k/powerlevel9k')
   or (item is defined and item.theme is defined
-  and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k == true)
+  and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k is sameas true)
   or (item is defined and item.theme is defined
-  and item.theme == 'powerlevel10k/powerlevel10k' and ohmyzsh_powerlevel9k == true)
+  and item.theme == 'powerlevel10k/powerlevel10k' and ohmyzsh_powerlevel9k is sameas true)
   else ohmyzsh_default_theme }}"
 
-{% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k == true %}
+{% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k is sameas true %}
 source "{{ ohmyzsh_powerlevel9k_cfg }}"
 {% endif %}
 # Set to this to use case-sensitive completion

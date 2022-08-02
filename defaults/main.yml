@@ -14,6 +14,8 @@ ohmyzsh_powerlevel10k_import_config: no
 ohmyzsh_powerlevel9k: no              # yes - use p9k prompt style | no - use p10k prompt style
 ohmyzsh_powerlevel9k_cfg: ${HOME}/.zsh/omz_powerlevel9k.cfg
 
+ohmyzsh_setup_tmux: yes
+
 ohmyzsh_default_theme: 'robbyrussell' # default fallback theme
 
 ohmyzsh_users:
