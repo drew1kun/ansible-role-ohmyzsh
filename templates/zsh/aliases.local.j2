@@ -68,18 +68,22 @@ function myip() {
     ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
     ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
-# As an info only. This function is now a part of zsh `osx` plugin:
-#cdf () {
-#    finderPath=`osascript -e 'tell application "Finder"
-#        try
-#            set currentFolder to (folder of the front window as alias)
-#            on error
-#            set currentFolder to (path to desktop folder as alias)
-#        end try
-#        POSIX path of currentFolder
-#        end tell'`;
-#    cd "$finderPath"
-#}
+
+# These were part of 'osx' ohmyzsh plugin which is discontinued
+alias rmdstore="find . -name '.DS_Store' -type f -delete"
+
+cdf () {
+    finderPath=`osascript -e 'tell application "Finder"
+        try
+            set currentFolder to (folder of the front window as alias)
+            on error
+            set currentFolder to (path to desktop folder as alias)
+        end try
+        POSIX path of currentFolder
+        end tell'`;
+    cd "$finderPath"
+}
+
 {% else %}
 alias rbv='echo "rbenv versions:" && \
     rbenv versions && \
