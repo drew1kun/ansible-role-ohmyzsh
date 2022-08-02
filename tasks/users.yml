@@ -65,8 +65,7 @@
 - name: '[users] Generate Powerlevel9k custom configuration'
   copy:
     src: omz_powerlevel9k.cfg
-    dest: "{{ ohmyzsh_powerlevel9k_cfg }}"
-    #dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/"
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.zsh/"
     mode: 0644
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
@@ -93,11 +92,10 @@
   tags: ohmyzsh
 
 # Powerlevel10k
-- name: '[users] Generate Powerlevel9k custom configuration'
+- name: '[users] Generate Powerlevel10k custom configuration'
   copy:
     src: p10k.zsh
-    dest: "{$HOME}/.p10k.zsh"
-    #dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.p10k.zsh"
+    dest: "{{ ohmyzsh_root_dir if item.user == 'root' else ohmyzsh_home_dir ~ item.user }}/.p10k.zsh"
     mode: 0644
     owner: "{{ item.user }}"
     group: "{{ item.user if ansible_os_family != 'Darwin' else 'wheel' if item.user == 'root' else 'staff' }}"
