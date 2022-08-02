@@ -73,6 +73,7 @@
   - "item.state is not defined or 'present'in item.state"
   - ohmyzsh_powerlevel9k is defined
   - ohmyzsh_powerlevel9k
+  - "'powerlevel9k' in item.theme"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
@@ -104,6 +105,7 @@
   - ohmyzsh_powerlevel10k is defined
   - ohmyzsh_powerlevel10k
   - ohmyzsh_powerlevel10k_import_config
+  - "'powerlevel10k' in item.theme"
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh

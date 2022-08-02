@@ -1,6 +1,6 @@
 # This file is managed by Ansible, all changes will be lost
 
-{% if ohmyzsh_setup_tmux is defined and ohmyzsh_setup_tmux is sameas true %}
+{% if ohmyzsh_setup_tmux|default(false) %}
 # Automatically start tmux when starting new shell
 {% if 'tmux' in (ohmyzsh_default_plugins|default|list + item.plugins|default|list) %}
 ZSH_TMUX_AUTOSTART=false  # true - will start tmux automatically ATTACHED TO CURRENT SESSION!
@@ -36,15 +36,26 @@ export TERM="xterm-256color"
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="random"
 ZSH_THEME="{{ item.theme if
-  (item is defined and item.theme is defined and item.theme != 'powerlevel9k/powerlevel9k')
-  or (item is defined and item.theme is defined
-  and item.theme == 'powerlevel9k/powerlevel9k' and ohmyzsh_powerlevel9k is sameas true)
-  or (item is defined and item.theme is defined
-  and item.theme == 'powerlevel10k/powerlevel10k' and ohmyzsh_powerlevel9k is sameas true)
+  (item.theme is defined
+  and 'powerlevel9k/powerlevel9k' in item.theme
+  and ohmyzsh_powerlevel9k|default(false)) or
+  (item.theme is defined
+  and 'powerlevel10k/powerlevel10k' in item.theme
+  and ohmyzsh_powerlevel10k|default(false))
   else ohmyzsh_default_theme }}"
 
-{% if ohmyzsh_powerlevel9k is defined and ohmyzsh_powerlevel9k is sameas true %}
+{% if ohmyzsh_powerlevel9k|default(false) %}
+{% if item.theme is defined and item.theme == 'powerlevel9k/powerlevel9k' %}
 source "{{ ohmyzsh_powerlevel9k_cfg }}"
+
+{% endif %}
+{% endif %}
+{% if ohmyzsh_powerlevel10k|default(true) %}
+{% if item.theme is defined and item.theme == 'powerlevel10k/powerlevel10k' %}
+# Source the existing p10k config (if it exists)
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+{% endif %}
 {% endif %}
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -144,11 +155,6 @@ if [ -f "${HOME}/.rails.env" ]; then
     source "${HOME}/.rails.env"
 fi
 
-{% if ohmyzsh_powerlevel10k|default(false) %}
-# Source the existing p10k config (if it exists)
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-{% endif %}
 # Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
