@@ -1,5 +1,7 @@
 ---
 # This is how it must be done (but this specific gem is not being installed):
+#
+# In case of any colorls-related issue on the configured host issue 'sudo gem install colorls'
 - name: '[users_colorls] Install colorls ruby gem'
   gem:
     name: colorls
