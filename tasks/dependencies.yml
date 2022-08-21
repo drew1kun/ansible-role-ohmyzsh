@@ -55,7 +55,7 @@
   - ohmyzsh_dependencies
 
 - name: '[dependencies] Install fzf useful key bindings and fuzzy completion'
-  command: "{{ ohmyzsh_brew_prefix }}/opt/fzf/install --key-bindings --completion --update-rc"
+  command: "{{ ohmyzsh_brew_prefix.stdout }}/opt/fzf/install --key-bindings --completion --update-rc"
   changed_when: false
   when:
   - "'Darwin' in ansible_os_family"

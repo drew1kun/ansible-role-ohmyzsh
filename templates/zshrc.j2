@@ -125,11 +125,11 @@ source <(kubectl completion zsh)
 {% endif %}
 
 # Customize to your needs...
-export PATH="${HOME}/.local/bin:${HOME}/bin::${PATH}"   # User-wide installed binaries
-export PATH="{{ ohmyzsh_brew_prefix }}/bin:${PATH}"     # Binaries installed with brew
-export PATH="${PATH}:${HOME}/.krew/bin"                 # Binaries installed with krew
-export PATH="$(brew --prefix)/opt/libpq/bin:${PATH}"    # libpg binaries
-export PATH="$(brew --prefix openvpn)/sbin:${PATH}"     # Brew installed openvpn bins
+export PATH="${HOME}/.local/bin:${HOME}/bin::${PATH}"       # User-wide installed binaries
+export PATH="{{ ohmyzsh_brew_prefix.stdout }}/bin:${PATH}"  # Binaries installed with brew
+export PATH="${PATH}:${HOME}/.krew/bin"                     # Binaries installed with krew
+export PATH="$(brew --prefix)/opt/libpq/bin:${PATH}"        # libpg binaries
+export PATH="$(brew --prefix openvpn)/sbin:${PATH}"         # Brew installed openvpn bins
 export GPG_TTY=$(tty)
 export EDITOR=vim visudo
 export SHELL="/usr/local/bin/zsh"
