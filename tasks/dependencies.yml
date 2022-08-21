@@ -33,6 +33,16 @@
   - ohmyzsh
   - ohmyzsh_dependencies
 
+- name: '[dependencies] Get correct brew prefix'
+  command: 'brew --prefix'
+  environment:
+    PATH: "/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+  register: ohmyzsh_brew_prefix
+  changed_when: false
+  tags:
+  - ohmyzsh
+  - ohmyzsh_dependencies
+
 - name: '[dependencies] Install fzf'
   homebrew: name=fzf state=present
   become: no  # always the case with homebrew
@@ -45,7 +55,7 @@
   - ohmyzsh_dependencies
 
 - name: '[dependencies] Install fzf useful key bindings and fuzzy completion'
-  command: /opt/homebrew/opt/fzf/install --key-bindings --completion --update-rc
+  command: "{{ ohmyzsh_brew_prefix }}/opt/fzf/install --key-bindings --completion --update-rc"
   changed_when: false
   when:
   - "'Darwin' in ansible_os_family"
