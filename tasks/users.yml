@@ -174,4 +174,3 @@
   with_items: "{{ ohmyzsh_users }}"
   become: yes
   tags: ohmyzsh
-...

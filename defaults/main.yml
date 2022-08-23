@@ -45,4 +45,3 @@ ohmyzsh_custom_plugins:
 - zsh-autosuggestions
 - zsh-history-substring-search
 - zsh-syntax-highlighting
-...

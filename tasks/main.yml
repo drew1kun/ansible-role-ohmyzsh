@@ -26,4 +26,3 @@
   - ohmyzsh_users is defined
   - ohmyzsh_users | length > 0
   tags: ohmyzsh
-...

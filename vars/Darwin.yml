@@ -2,4 +2,3 @@
 ohmyzsh_root_dir: '/var/root'
 ohmyzsh_home_dir: '/Users/'
 ohmyzsh_zprofile_dir: '/etc/'
-...

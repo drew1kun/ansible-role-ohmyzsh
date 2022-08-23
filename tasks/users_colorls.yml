@@ -53,4 +53,3 @@
   - ohmyzsh_users | length > 1
   - item.colorls
   tags: ohmyzsh
-...

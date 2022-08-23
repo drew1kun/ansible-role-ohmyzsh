@@ -16,9 +16,9 @@ If installed both, but want to turn `p9k` off, then comment the following line i
 
 	source ${HOME}/.zsh/omz_powerlevel9k.cfg
 
-In combination with [ansible-macos_terminal role](https://github.com/drew-kun/ansible-macos_terminal) getting the following results(assuming you are using p9k or p10k+p9k combo):
+In combination with [ansible-macterm role](https://github.com/drew1kun/ansible-macterm) getting the following results(assuming you are using p9k or p10k+p9k combo):
 
-![alt text](https://github.com/drew-kun/ansible-ohmyzsh/blob/master/imgs/iterm2_ohmzsh.png "iTerm2")
+![alt text](https://github.com/drew1kun/ansible-ohmyzsh/blob/master/imgs/iterm2_ohmzsh.png "iTerm2")
 
 
 Requirements
@@ -79,7 +79,7 @@ Example Playbook
   gather_facts: yes
   roles:
   - geerlingguy.homebrew
-  - drew-kun.ohmyzsh
+  - drew1kun.ohmyzsh
 ```
 
 License
@@ -93,9 +93,9 @@ Author Information
 Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 
 [role-badge]: https://img.shields.io/badge/role-drew--kun.ohmyzsh-green.svg
-[galaxy-link]: https://galaxy.ansible.com/drew-kun/ohmyzsh/
+[galaxy-link]: https://galaxy.ansible.com/drew1kun/ohmyzsh/
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-ohmyzsh/master/LICENSE
+[mit-link]: https://raw.githubusercontent.com/drew1kun/ansible-ohmyzsh/master/LICENSE
 [homebrew]: http://brew.sh/
 [ohmyzsh]: https://github.com/robbyrussell/oh-my-zsh
 [powerlevel9k]: https://github.com/bhilburn/powerlevel9k
