@@ -3,6 +3,15 @@
 [![MIT licensed][mit-badge]][mit-link]
 [![Galaxy Role][role-badge]][galaxy-link]
 
+DEPRECATION NOTICE
+----
+This role is being deprecated in favor of [ansible-collection-slickshell][slickshell-github-link].
+
+Collection on Galaxy: [drew1kun.slickshell][slickshell-galaxy-link]
+
+Description
+----
+
 Cross-platform ansible role for installing and configuring zsh with [oh-my-zsh][ohmyzsh]
 
 There is a choice between [powerlevel10k][powerlevel10k] and [powerlevel9k][powerlevel9k]
@@ -102,3 +111,5 @@ Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 [ohmyzsh]: https://github.com/robbyrussell/oh-my-zsh
 [powerlevel9k]: https://github.com/bhilburn/powerlevel9k
 [powerlevel10k]: https://github.com/romkatv/powerlevel10k
+[slickshell-github-link]:https://github.com/drew1kun/ansible-collection-slickshell
+[slickshell-galaxy-link]:https://galaxy.ansible.com/drew1kun/slickshell
